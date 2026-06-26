@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AXL - Connexion</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body class="light-mode">
+
+
+<header class="navbar">
+
+<a class="logo" href="index.html">AXL</a>
+
+
+<nav>
+<ul class="nav-links">
+
+<li><a href="index.html">Accueil</a></li>
+
+<li><a href="cours.html">Cours</a></li>
+
+<li><a href="objectifs.html">Objectifs</a></li>
+
+<li><a href="progres.html">Progrès</a></li>
+
+<li><a href="parametres.html">Paramètres</a></li>
+
+</ul>
+</nav>
+
+
+<div class="nav-actions">
+
+<select>
+<option>Français</option>
+<option>English</option>
+<option>Kreyòl</option>
+</select>
+
+
+<button class="icon-button" onclick="toggleDarkMode()">
+<i class="fas fa-moon"></i>
+</button>
+
+
+</div>
+
+</header>
+
+
+
+<main>
+
+
+<section class="hero">
+
+
+<div class="hero-content">
+
+
+<p class="eyebrow">
+Connexion AXL
+</p>
+
+
+<h1>
+Bienvenue de nouveau 👋
+</h1>
+
+
+<p>
+Connecte-toi pour retrouver tes cours, tes objectifs et ta progression.
+</p>
+
+
+
+<div class="section-box">
+
+
+<form id="loginForm">
+
+
+<h2>
+<i class="fas fa-user"></i>
+Connexion
+</h2>
+
+
+
+<label>
+Email ou nom d'utilisateur
+</label>
+
+<input 
+type="text"
+placeholder="Entrer votre identifiant"
+required>
+
+
+
+<label>
+Mot de passe
+</label>
+
+
+<input
+type="password"
+placeholder="Mot de passe"
+required>
+
+
+
+
+<div class="checkbox-group">
+
+
+<label>
+
+<input type="checkbox">
+
+Se souvenir de moi
+
+</label>
+
+
+<label>
+
+<input type="checkbox" required>
+
+Je ne suis pas un robot
+
+</label>
+
+
+</div>
+
+
+
+<button class="primary-cta" type="submit">
+
+Se connecter
+
+<i class="fas fa-arrow-right"></i>
+
+</button>
+
+
+
+<p class="link-option"
+onclick="showRegister()">
+
+Créer un compte
+
+</p>
+
+
+
+<p class="link-option">
+
+Mot de passe oublié ?
+
+</p>
+
+
+</form>
+
+
+
+
+
+<form id="registerForm" style="display:none;">
+
+
+
+<h2>
+<i class="fas fa-user-plus"></i>
+Créer un compte
+</h2>
+
+
+
+<input 
+type="text"
+placeholder="Nom complet"
+required>
+
+
+<input
+type="email"
+placeholder="Email"
+required>
+
+
+<input
+type="text"
+placeholder="Niveau scolaire"
+required>
+
+
+<input
+type="password"
+placeholder="Mot de passe"
+required>
+
+
+<input
+type="password"
+placeholder="Confirmer le mot de passe"
+required>
+
+
+
+
+<label>
+
+<input type="checkbox" required>
+
+J'accepte les conditions
+
+</label>
+
+
+
+
+<button class="primary-cta">
+
+Créer mon compte
+
+<i class="fas fa-check"></i>
+
+</button>
+
+
+
+<p class="link-option"
+onclick="showLogin()">
+
+J'ai déjà un compte
+
+</p>
+
+
+
+</form>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<aside class="assistant-panel">
+
+
+<div class="ai-message">
+
+AXL est prêt à t'accompagner 🚀
+
+</div>
+
+
+<img src="ai-bot.png" alt="AXL">
+
+
+<div class="mini-dashboard">
+
+
+<strong>
+
+Apprentissage intelligent
+
+</strong>
+
+
+<p>
+
+Connecte-toi pour continuer tes révisions.
+
+</p>
+
+
+</div>
+
+
+</aside>
+
+
+
+</section>
+
+
+
+</main>
+
+
+
+<footer>
+
+<p>
+© 2025 AXL. Tous droits réservés.
+</p>
+
+</footer>
+
+
+
+<script>
+
+
+function showRegister(){
+
+document.getElementById("loginForm").style.display="none";
+
+document.getElementById("registerForm").style.display="block";
+
+}
+
+
+
+function showLogin(){
+
+document.getElementById("loginForm").style.display="block";
+
+document.getElementById("registerForm").style.display="none";
+
+}
+
+
+
+document.getElementById("loginForm").addEventListener("submit",function(e){
+
+e.preventDefault();
+
+
+alert("Connexion réussie !");
+
+
+window.location.href="index.html";
+
+
+});
+
+
+</script>
+
+
+<script src="script.js"></script>
+
+
+</body>
+</html>

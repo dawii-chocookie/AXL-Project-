@@ -1,0 +1,111 @@
+:root {
+  --color-background: #f5f0e6;
+  --color-text: #3b2f2f;
+  --color-accent: #8b5e3c;
+  --color-card-bg: #fffaf3;
+  --color-header-bg: #4e342e;
+  --color-footer-bg: #3e2723;
+
+  --color-dark-bg: #2e1f1b;
+  --color-dark-text: #e0d2c0;
+  --color-dark-card: #3b2b28;
+
+  --transition-speed: 0.3s;
+  --font-serif: "Georgia", serif;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-serif);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+/* Mode sombre */
+body.dark-mode {
+  background-color: var(--color-dark-bg);
+  color: var(--color-dark-text);
+}
+
+.navbar {
+  background-color: var(--color-header-bg);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+}
+
+.nav-links select,
+.nav-links button {
+  background-color: var(--color-accent);
+  color: white;
+  border: none;
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.hero {
+  background-color: var(--color-accent);
+  color: white;
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+}
+
+.features {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+.feature-card {
+  background-color: var(--color-card-bg);
+  padding: 1.5rem;
+  border-radius: 10px;
+  width: 300px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: background-color var(--transition-speed), color var(--transition-speed);
+  border: 1px solid #d6c8b0;
+}
+
+body.dark-mode .feature-card {
+  background-color: var(--color-dark-card);
+  color: var(--color-dark-text);
+  border: 1px solid #5c4538;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: var(--color-footer-bg);
+  color: white;
+}
+
+body.dark-mode footer {
+  background-color: #1b1210;
+}
+.mont{
+color:#1b1210;
+}

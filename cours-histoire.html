@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cours Histoire</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0 20px 40px;
+      background: #f9f5f1;
+      color: #3b2f2f;
+    }
+    header {
+      background: #8b5e3c;
+      padding: 15px 20px;
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    nav a {
+      color: white;
+      margin-right: 20px;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    h1 {
+      margin-top: 30px;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #5a3e1b;
+    }
+    section {
+      margin-bottom: 40px;
+      background: #fff3e6;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(139, 94, 60, 0.3);
+    }
+    h2 {
+      color: #8b5e3c;
+      margin-bottom: 15px;
+    }
+    p, ul {
+      line-height: 1.5;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    strong {
+      color: #6b4321;
+    }
+    .question {
+      margin-top: 15px;
+      font-weight: bold;
+      color: #4a2c0a;
+    }
+    .answers {
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+    .answers label {
+      display: block;
+      margin-bottom: 6px;
+      cursor: pointer;
+    }
+    button.check-btn {
+      background-color: #8b5e3c;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button.check-btn:hover {
+      background-color: #7a5030;
+    }
+    .result {
+      margin-top: 8px;
+      font-weight: bold;
+    }
+    .correct {
+      color: green;
+    }
+    .incorrect {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="#independance">Indépendance d'Haïti</a>
+    <a href="#guerres">Les Deux Guerres Mondiales</a>
+	    <a href="#colonisation">La colonisation et l’impérialisme au XIXe siècle</a>
+  </nav>
+</header>
+
+<h1>Mes cours d’Histoire</h1>
+
+<section id="independance">
+  <h2>1. L'Indépendance d’Haïti</h2>
+
+  <h3>Causes</h3>
+  <p>
+    Haïti, alors appelée Saint-Domingue, était une colonie française avec une économie basée sur l'esclavage. Les esclaves vivaient dans des conditions très dures et voulaient la liberté. 
+    L'influence des idées des Lumières et de la Révolution française (liberté, égalité) a aussi encouragé la révolte.
+  </p>
+
+  <h3>Événements majeurs</h3>
+  <ul>
+    <li><strong>1791</strong> : début de la révolte des esclaves dirigée par Toussaint Louverture.</li>
+    <li><strong>1793</strong> : abolition de l'esclavage en Saint-Domingue par la France.</li>
+    <li><strong>1804</strong> : proclamation de l’indépendance d’Haïti, premier État noir libre.</li>
+  </ul>
+
+  <h3>Héros de l’indépendance</h3>
+  <ul>
+    <li><strong>Toussaint Louverture</strong> : leader de la révolution, stratège militaire.</li>
+    <li><strong>Jean-Jacques Dessalines</strong> : proclamateur de l’indépendance, premier dirigeant d’Haïti.</li>
+  </ul>
+
+  <h3>Conséquences et impact dans le monde</h3>
+  <p>
+    L’indépendance d’Haïti a été une victoire majeure contre l’esclavage et le colonialisme. Elle a inspiré d’autres mouvements abolitionnistes dans les Amériques. Cependant, Haïti a aussi dû faire face à l’isolement politique et économique international.
+  </p>
+</section>
+
+  <div class="question">Question 1 : En quelle année Haïti a-t-elle obtenu son indépendance ?</div>
+  <div class="answers" data-correct="1804">
+    <label><input type="radio" name="q1" value="1791" /> 1791</label>
+    <label><input type="radio" name="q1" value="1804" /> 1804</label>
+    <label><input type="radio" name="q1" value="1815" /> 1815</label>
+  </div>
+  <button class="check-btn" data-question="q1">Vérifier</button>
+  <div class="result" id="result-q1"></div>
+</section>
+
+<section id="guerres">
+  <h2>2. Les Deux Guerres Mondiales</h2>
+   <h2>Les deux guerres mondiales</h2>
+
+  <h3>Causes principales</h3>
+  <ul>
+    <li>La compétition entre grandes puissances européennes.</li>
+    <li>Les alliances militaires complexes (Triple Entente et Triple Alliance).</li>
+    <li>L'assassinat de l'archiduc François-Ferdinand (1914) déclenche la Première Guerre mondiale.</li>
+    <li>La montée des tensions politiques, économiques et idéologiques avant la Seconde Guerre mondiale.</li>
+  </ul>
+
+  <h3>Les Alliés principaux</h3>
+  <ul>
+    <li><strong>Première Guerre mondiale</strong> : France, Royaume-Uni, Russie, États-Unis (à partir de 1917).</li>
+    <li><strong>Seconde Guerre mondiale</strong> : États-Unis, Royaume-Uni, URSS, France libre.</li>
+  </ul>
+
+  <h3>Batailles et événements clés</h3>
+  <ul>
+    <li><strong>Première Guerre mondiale</strong> : bataille de la Somme, Verdun (1916).</li>
+    <li><strong>Seconde Guerre mondiale</strong> : bataille de Stalingrad, débarquement de Normandie (1944).</li>
+  </ul>
+
+  <h3>Fin des guerres et conséquences</h3>
+  <p>
+    La Première Guerre mondiale s’est terminée en 1918 par la défaite des puissances centrales et a conduit au traité de Versailles. La Seconde Guerre mondiale a pris fin en 1945 avec la capitulation de l’Allemagne et du Japon, laissant le monde profondément changé, avec la création de l’ONU et le début de la Guerre froide.
+  </p>
+
+  <h3>Autres informations importantes</h3>
+  <ul>
+    <li>Les guerres ont causé des millions de morts et des destructions massives.</li>
+    <li>La Seconde Guerre mondiale a vu l'Holocauste et l'utilisation des bombes atomiques.</li>
+  </ul>
+</section>
+
+
+  <div class="question">Question 2 : Quelle bataille est célèbre durant la Seconde Guerre mondiale ?</div>
+  <div class="answers" data-correct="Stalingrad">
+    <label><input type="radio" name="q2" value="Verdun" /> Verdun</label>
+    <label><input type="radio" name="q2" value="Stalingrad" /> Stalingrad</label>
+    <label><input type="radio" name="q2" value="Somme" /> Somme</label>
+  </div>
+  <button class="check-btn" data-question="q2">Vérifier</button>
+  <div class="result" id="result-q2"></div>
+</section>
+<section id="colonisation" class="course-section">
+  <h2>3. La colonisation et l’impérialisme au XIXe siècle</h2>
+  <p>
+    Au XIXe siècle, de nombreuses puissances européennes ont étendu leur domination sur des territoires en Afrique, en Asie et ailleurs. Ce phénomène s’appelle la colonisation.
+  </p>
+  <h3>Causes</h3>
+  <ul>
+    <li>Recherche de nouvelles ressources et marchés pour l’industrie</li>
+    <li>Volonté politique de puissance et prestige national</li>
+    <li>Mission civilisatrice et diffusion de la culture européenne</li>
+  </ul>
+  <h3>Les grandes puissances coloniales</h3>
+  <p>La France, le Royaume-Uni, l’Allemagne, la Belgique, et d’autres pays ont participé à la conquête coloniale.</p>
+  <h3>Conséquences</h3>
+  <ul>
+    <li>Exploitation économique des colonies</li>
+    <li>Destruction des sociétés et cultures locales</li>
+    <li>Résistances et révoltes des peuples colonisés</li>
+  </ul>
+  <h3>Questions</h3>
+  <ol>
+    <li><button class="q-btn">Quelles sont les principales causes de la colonisation au XIXe siècle ?</button>
+      <div class="answer">Les principales causes sont la recherche de ressources, le prestige national et la mission civilisatrice.</div>
+    </li>
+    <li><button class="q-btn">Quels pays européens étaient les plus impliqués dans la colonisation ?</button>
+      <div class="answer">La France, le Royaume-Uni, l’Allemagne, la Belgique, entre autres.</div>
+    </li>
+    <li><button class="q-btn">Quelles conséquences la colonisation a-t-elle eu pour les peuples colonisés ?</button>
+      <div class="answer">Exploitation économique, destruction des cultures, résistances et révoltes.</div>
+    </li>
+  </ol>
+</section>
+
+<style>
+  .course-section {
+    margin-bottom: 2em;
+  }
+  .answer {
+    display: none;
+    margin-top: 0.3em;
+    padding: 0.5em;
+    background-color: #f9f1e7;
+    border-left: 4px solid #8b5e3c;
+    color: #5b3a1a;
+    font-style: italic;
+  }
+  .q-btn {
+    background: none;
+    border: none;
+    color: #8b5e3c;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: left;
+    padding: 0;
+    margin: 0.3em 0;
+    font-size: 1em;
+  }
+  .q-btn:hover {
+    text-decoration: underline;
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.q-btn').forEach(button => {
+    button.addEventListener('click', () => {
+      const answer = button.nextElementSibling;
+      if (answer.style.display === 'block') {
+        answer.style.display = 'none';
+      } else {
+        answer.style.display = 'block';
+      }
+    });
+  });
+</script>
+<script>
+  // Smooth scrolling pour les liens d'ancrage
+  document.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const targetId = link.getAttribute('href').substring(1);
+      document.getElementById(targetId).scrollIntoView({behavior: 'smooth'});
+    });
+  });
+
+  // Gestion des vérifications des questions
+  document.querySelectorAll('.check-btn').forEach(button => {
+    button.addEventListener('click', () => {
+      const qName = button.getAttribute('data-question');
+      const answersDiv = document.querySelector(`.answers[data-correct][data-correct]`);
+      const answers = document.querySelectorAll(`input[name="${qName}"]`);
+      const resultDiv = document.getElementById(`result-${qName}`);
+
+      let selected = null;
+      answers.forEach(input => {
+        if(input.checked) selected = input.value;
+      });
+      if(selected === null) {
+        resultDiv.textContent = "Veuillez choisir une réponse.";
+        resultDiv.className = "result incorrect";
+        return;
+      }
+
+      // Trouver la bonne réponse dans la div answers correspondante
+      const correctAnswer = document.querySelector(`.answers[data-correct][data-correct]`);
+      const correct = document.querySelector(`.answers[data-correct]`);
+
+      // Récupérer la bonne réponse dans la div des réponses relatives à cette question:
+      // Simplifions avec dataset
+      const answersContainer = document.querySelector(`.answers[data-correct][data-correct]`) // ce code est faussé, corrige:
+
+      // Correction du code:
+      const answersContainerByName = document.querySelector(`.answers[data-correct]:has(input[name="${qName}"])`);
+      const correctAnswerText = answersContainerByName ? answersContainerByName.dataset.correct : null;
+
+      if(selected === correctAnswerText) {
+        resultDiv.textContent = "Bravo, c’est la bonne réponse ! 🎉";
+        resultDiv.className = "result correct";
+      } else {
+        resultDiv.textContent = `Désolé, la bonne réponse est : ${correctAnswerText}.`;
+        resultDiv.className = "result incorrect";
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

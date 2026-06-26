@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AXL - Francais</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+
+    :root {
+      --primary: #A7F3D0;
+      --secondary: #34D399;
+      --accent: #047857;
+      --accent-dark: #064E3B;
+      --background: #F8FAFC;
+      --text: #0F172A;
+      --muted: #64748B;
+      --card: #FFFFFF;
+      --line: rgba(15, 23, 42, 0.1);
+      --shadow: 0 18px 55px rgba(15, 23, 42, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(167, 243, 208, 0.36), transparent 30rem),
+        linear-gradient(180deg, #fff 0%, var(--background) 45%);
+      color: var(--text);
+      font-family: 'Inter', Arial, sans-serif;
+    }
+
+    body.dark-mode {
+      --background: #0F172A;
+      --text: #F8FAFC;
+      --muted: #CBD5E1;
+      --card: #1E293B;
+      --line: rgba(248, 250, 252, 0.12);
+      --shadow: 0 22px 60px rgba(0, 0, 0, 0.35);
+      background:
+        radial-gradient(circle at top left, rgba(4, 120, 87, 0.28), transparent 28rem),
+        linear-gradient(180deg, #111827 0%, #0F172A 55%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 16px clamp(20px, 5vw, 64px);
+      background: rgba(255, 255, 255, 0.78);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(16px);
+    }
+
+    body.dark-mode .navbar {
+      background: rgba(15, 23, 42, 0.82);
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: clamp(12px, 2vw, 24px);
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .nav-links a.active,
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .icon-button {
+      width: 42px;
+      min-height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: var(--card);
+      color: var(--text);
+    }
+
+    .french-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 380px);
+      gap: 24px;
+      align-items: center;
+      padding: clamp(32px, 6vw, 72px) clamp(20px, 5vw, 64px);
+      background:
+        linear-gradient(135deg, rgba(52, 211, 153, 0.95), rgba(167, 243, 208, 0.86)),
+        var(--secondary);
+      color: #062f25;
+    }
+
+    .eyebrow,
+    .panel-kicker {
+      margin-bottom: 10px;
+      color: var(--accent-dark);
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin-bottom: 18px;
+      font-size: clamp(2.4rem, 6vw, 4.4rem);
+      line-height: 0.98;
+    }
+
+    .french-hero p {
+      max-width: 650px;
+      color: rgba(6, 47, 37, 0.78);
+      font-size: 1.08rem;
+      line-height: 1.55;
+    }
+
+    .level-card {
+      padding: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.55);
+    }
+
+    .level-card strong {
+      display: block;
+      margin-bottom: 14px;
+      font-size: 1.3rem;
+    }
+
+    .level-card select {
+      width: 100%;
+      min-height: 44px;
+      padding: 0 12px;
+      border: 1px solid rgba(6, 78, 59, 0.22);
+      border-radius: 999px;
+      background: #fff;
+      color: #062f25;
+      font-weight: 800;
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 40px));
+      margin: 28px auto 52px;
+    }
+
+    .branch-tabs {
+      position: sticky;
+      top: 75px;
+      z-index: 10;
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 12px;
+      margin-bottom: 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.86);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+
+    body.dark-mode .branch-tabs {
+      background: rgba(30, 41, 59, 0.86);
+    }
+
+    .branch-tabs button {
+      flex: 0 0 auto;
+      min-height: 42px;
+      padding: 0 16px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--card);
+      color: var(--text);
+      font-weight: 800;
+    }
+
+    .branch-tabs button.active {
+      border-color: transparent;
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
+      color: #063d2e;
+    }
+
+    .course-grid {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .chapter-nav,
+    .branch-panel,
+    .chapter-card {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+    }
+
+    .chapter-nav {
+      position: sticky;
+      top: 155px;
+      padding: 18px;
+    }
+
+    .chapter-nav h2 {
+      margin-bottom: 14px;
+      font-size: 1.05rem;
+    }
+
+    .chapter-nav a {
+      display: block;
+      padding: 11px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .chapter-nav a:hover {
+      color: var(--accent);
+    }
+
+    .branch-panel {
+      padding: clamp(18px, 3vw, 28px);
+    }
+
+    .branch-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .branch-heading h2 {
+      font-size: clamp(1.8rem, 4vw, 2.7rem);
+    }
+
+    .branch-heading > i {
+      display: grid;
+      place-items: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      background: rgba(52, 211, 153, 0.14);
+      color: var(--accent);
+      font-size: 1.8rem;
+    }
+
+    .subbranch-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .subbranch-list span {
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .chapter-stack {
+      display: grid;
+      gap: 16px;
+    }
+
+    .chapter-card {
+      padding: 20px;
+      box-shadow: none;
+    }
+
+    .chapter-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .chapter-card h3 {
+      margin-bottom: 8px;
+      font-size: 1.35rem;
+    }
+
+    .chapter-card p {
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .primary-btn,
+    .light-btn {
+      min-height: 40px;
+      padding: 0 14px;
+      border-radius: 999px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .primary-btn {
+      border: 0;
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .light-btn {
+      border: 1px solid var(--line);
+      background: rgba(52, 211, 153, 0.1);
+      color: var(--accent);
+    }
+
+    .summary {
+      display: none;
+      margin-top: 14px;
+      padding: 16px;
+      border-radius: 14px;
+      background: rgba(52, 211, 153, 0.1);
+    }
+
+    .summary.open {
+      display: block;
+    }
+
+    .summary ul,
+    .exercise-list {
+      padding-left: 20px;
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    .chapter-actions {
+      margin-top: 14px;
+    }
+
+    .empty {
+      padding: 24px;
+      border: 1px dashed var(--line);
+      border-radius: 16px;
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    @media (max-width: 820px) {
+      .navbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+      }
+
+      .french-hero,
+      .course-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .chapter-nav {
+        position: static;
+      }
+
+      .chapter-top {
+        flex-direction: column;
+      }
+
+      .primary-btn,
+      .light-btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <a class="logo" href="index.html">AXL</a>
+    <nav aria-label="Navigation principale">
+      <ul class="nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a class="active" href="cours.html">Cours</a></li>
+        <li><a href="objectifs.html">Objectifs</a></li>
+        <li><a href="progres.html">Progr&egrave;s</a></li>
+        <li><a href="parametres.html">Param&egrave;tres</a></li>
+      </ul>
+    </nav>
+    <button class="icon-button" type="button" onclick="toggleDarkMode()" title="Changer le theme" aria-label="Changer le theme">
+      <i id="theme-icon" class="fas fa-moon"></i>
+    </button>
+  </header>
+
+  <section class="french-hero">
+    <div>
+      <p class="eyebrow">Francais adapte</p>
+      <h1 id="pageTitle">Cours de francais pour ton niveau.</h1>
+      <p id="pageIntro">Choisis ton niveau, puis travaille par branches: grammaire, conjugaison, orthographe, lecture, ecriture et methode.</p>
+    </div>
+    <aside class="level-card">
+      <strong>Niveau de l'eleve</strong>
+      <select id="levelSelect" aria-label="Choisir le niveau">
+        <option value="ce1">CE1</option>
+        <option value="ce2">CE2</option>
+        <option value="cm1">CM1</option>
+        <option value="cm2">CM2</option>
+        <option value="6eme">6eme</option>
+        <option value="5eme">5eme</option>
+        <option value="4eme">4eme</option>
+        <option value="3eme">3eme</option>
+        <option value="seconde">Seconde</option>
+        <option value="premiere">Premiere</option>
+        <option value="terminale">Terminale</option>
+      </select>
+    </aside>
+  </section>
+
+  <main class="page">
+    <div class="branch-tabs" id="branchTabs" aria-label="Branches de francais"></div>
+    <section class="course-grid">
+      <aside class="chapter-nav">
+        <h2>Chapitres</h2>
+        <div id="chapterNav"></div>
+      </aside>
+      <div id="courseContent"></div>
+    </section>
+  </main>
+
+  <script>
+    const levels = {
+      ce1: "CE1",
+      ce2: "CE2",
+      cm1: "CM1",
+      cm2: "CM2",
+      "6eme": "6eme",
+      "5eme": "5eme",
+      "4eme": "4eme",
+      "3eme": "3eme",
+      seconde: "Seconde",
+      premiere: "Premiere",
+      terminale: "Terminale"
+    };
+
+    const branchTemplates = {
+      primaire: [
+        {
+          key: "lecture",
+          title: "Lecture",
+          icon: "fa-book-open-reader",
+          subbranches: ["Comprehension", "Vocabulaire", "Indices du texte", "Lecture expressive"],
+          chapters: [
+            chapter("Comprendre un texte court", "Repérer les personnages, le lieu et l'action principale.", ["Lis un texte de 10 lignes et nomme le heros.", "Trouve ou se passe l'histoire.", "Ecris une phrase qui resume le texte."], ["Lis le titre avant le texte.", "Cherche qui fait l'action.", "Le resume garde seulement les idees importantes."]),
+            chapter("Trouver les informations", "Distinguer les details utiles des details secondaires.", ["Souligne une information importante.", "Reponds a: qui, quoi, ou, quand ?", "Barre une phrase qui n'aide pas a comprendre."], ["Les questions guident la lecture.", "Une information utile aide a repondre.", "Relire evite les erreurs."]),
+            chapter("Lire a voix haute", "Lire avec fluidite et respecter la ponctuation.", ["Lis un paragraphe sans t'arreter au milieu des mots.", "Marque une pause apres chaque point.", "Change le ton pour une question."], ["La ponctuation indique les pauses.", "Une question monte souvent en intonation.", "S'entrainer rend la lecture plus fluide."])
+          ]
+        },
+        {
+          key: "grammaire",
+          title: "Grammaire",
+          icon: "fa-pen-nib",
+          subbranches: ["Phrase", "Nom", "Verbe", "Groupe nominal"],
+          chapters: [
+            chapter("La phrase", "Reconnaitre une phrase correcte.", ["Remets les mots dans l'ordre: mange / pomme / une / Lea.", "Ajoute la majuscule et le point.", "Dis si la phrase a un sens."], ["Une phrase commence par une majuscule.", "Elle se termine par un signe de ponctuation.", "Les mots doivent former une idee complete."]),
+            chapter("Le nom et le determinant", "Identifier ce qui designe une personne, un animal ou une chose.", ["Entoure les noms: chien, courir, table.", "Ajoute un determinant devant maison.", "Classe: personne, animal, chose."], ["Le nom designe quelqu'un ou quelque chose.", "Le determinant accompagne souvent le nom.", "Le nom peut etre masculin ou feminin."]),
+            chapter("Le verbe", "Trouver l'action dans une phrase.", ["Souligne le verbe dans: Sami court vite.", "Change: je chante / nous ...", "Trouve l'infinitif de mange."], ["Le verbe indique souvent une action.", "Il change selon le sujet.", "L'infinitif est la forme de base."])
+          ]
+        },
+        {
+          key: "orthographe",
+          title: "Orthographe",
+          icon: "fa-spell-check",
+          subbranches: ["Sons", "Accords simples", "Mots frequents", "Dictée"],
+          chapters: [
+            chapter("Les sons proches", "Distinguer les sons qui se ressemblent.", ["Choisis entre s et ss dans poi_on.", "Classe les mots avec g doux et g dur.", "Ecris trois mots avec le son an."], ["Certains sons peuvent s'ecrire de plusieurs facons.", "Le contexte aide a choisir.", "La lecture aide a memoriser l'orthographe."]),
+            chapter("Accords dans le groupe nominal", "Accorder determinant, nom et adjectif.", ["Mets au pluriel: le petit chat.", "Complete: une fleur bleu...", "Corrige: les maison blanche."], ["Le pluriel prend souvent s.", "L'adjectif s'accorde avec le nom.", "Le determinant annonce souvent le genre et le nombre."]),
+            chapter("Mots invariables", "Memoriser les mots qui ne changent pas.", ["Ecris une phrase avec toujours.", "Trouve l'intrus: mais, avec, petit.", "Recopie cinq mots invariables."], ["Un mot invariable garde la meme forme.", "Beaucoup servent a relier des idees.", "Il faut les apprendre par la pratique."])
+          ]
+        }
+      ],
+      college: [
+        {
+          key: "grammaire",
+          title: "Grammaire",
+          icon: "fa-pen-nib",
+          subbranches: ["Types de phrases", "Fonctions", "Groupes", "Subordonnees"],
+          chapters: [
+            chapter("Types et formes de phrases", "Identifier l'intention d'une phrase et sa forme.", ["Transforme une phrase declarative en interrogative.", "Reconnait une phrase exclamative.", "Mets une phrase a la forme negative."], ["Declarative, interrogative, imperative et exclamative indiquent l'intention.", "La forme negative encadre souvent le verbe.", "La ponctuation donne un indice important."]),
+            chapter("Le groupe nominal", "Analyser le noyau, les expansions et les accords.", ["Entoure le nom noyau.", "Ajoute un adjectif epithete.", "Remplace une expansion par une proposition relative."], ["Le nom noyau commande le groupe.", "Les expansions precisent le nom.", "Les accords suivent le genre et le nombre du nom."]),
+            chapter("Fonctions dans la phrase", "Distinguer sujet, complements et attribut.", ["Trouve le sujet du verbe.", "Identifie un complement d'objet.", "Remplace un attribut par un adjectif."], ["La fonction depend du role dans la phrase.", "Le sujet commande souvent le verbe.", "Un complement apporte une information necessaire ou circonstancielle."]),
+            chapter("Propositions subordonnees", "Comprendre les liens entre propositions.", ["Souligne la proposition relative.", "Trouve le mot subordonnant.", "Transforme deux phrases en une phrase complexe."], ["Une phrase complexe contient plusieurs verbes conjugues.", "La subordonnee depend d'une principale.", "Les pronoms relatifs relient au nom antecedent."])
+          ]
+        },
+        {
+          key: "conjugaison",
+          title: "Conjugaison",
+          icon: "fa-clock-rotate-left",
+          subbranches: ["Temps simples", "Temps composes", "Modes", "Valeurs"],
+          chapters: [
+            chapter("Present et imparfait", "Conjuguer et choisir le temps adapte.", ["Conjugue finir au present.", "Mets cette phrase a l'imparfait.", "Explique la valeur de l'imparfait."], ["Le present peut exprimer une action actuelle ou generale.", "L'imparfait decrit ou installe une habitude.", "Les terminaisons changent selon le groupe."]),
+            chapter("Passe compose et plus-que-parfait", "Construire les temps composes.", ["Choisis avoir ou etre.", "Accorde le participe passe si necessaire.", "Transforme au plus-que-parfait."], ["Un temps compose utilise un auxiliaire.", "Le participe passe peut s'accorder.", "Le plus-que-parfait indique une action anterieure."]),
+            chapter("Conditionnel et subjonctif", "Employer les modes selon le sens.", ["Conjugue pouvoir au conditionnel.", "Complete: il faut que tu ...", "Reconnait un souhait ou une hypothese."], ["Le conditionnel exprime souvent une hypothese.", "Le subjonctif suit certaines expressions de volonte ou doute.", "Le mode depend du point de vue exprime."])
+          ]
+        },
+        {
+          key: "ecriture",
+          title: "Ecriture",
+          icon: "fa-feather",
+          subbranches: ["Recit", "Description", "Argumentation", "Relecture"],
+          chapters: [
+            chapter("Organiser un paragraphe", "Construire une idee claire avec exemples.", ["Ecris une phrase idee.", "Ajoute un exemple precis.", "Supprime une repetition."], ["Un paragraphe developpe une idee.", "Les connecteurs aident l'enchainement.", "La relecture corrige le sens et la langue."]),
+            chapter("Ecrire un recit", "Respecter les etapes d'une histoire.", ["Imagine une situation initiale.", "Ajoute un element perturbateur.", "Ecris une fin en deux phrases."], ["Un recit suit une progression.", "Les temps du passe structurent l'action.", "Les details rendent l'histoire plus vivante."]),
+            chapter("Argumenter simplement", "Defendre une opinion avec raisons.", ["Donne ton avis sur la lecture.", "Ajoute deux arguments.", "Utilise car, donc ou cependant."], ["Une opinion doit etre justifiee.", "Un argument explique pourquoi.", "Un exemple rend l'argument plus concret."])
+          ]
+        },
+        {
+          key: "lecture",
+          title: "Lecture",
+          icon: "fa-book-open",
+          subbranches: ["Narrateur", "Personnages", "Genres", "Interpretation"],
+          chapters: [
+            chapter("Narrateur et point de vue", "Comprendre qui raconte et comment.", ["Indique si le narrateur dit je.", "Repere un point de vue interne.", "Explique ce que le lecteur sait."], ["Le narrateur n'est pas toujours l'auteur.", "Le point de vue limite ou ouvre les informations.", "Les pronoms donnent des indices."]),
+            chapter("Portrait et description", "Lire les details utiles d'un personnage ou lieu.", ["Classe details physiques et moraux.", "Trouve deux adjectifs descriptifs.", "Explique l'effet produit."], ["Une description organise les details.", "Le vocabulaire cree une impression.", "Le choix des adjectifs oriente le lecteur."]),
+            chapter("Lire un texte argumentatif", "Identifier these, arguments et exemples.", ["Souligne la these.", "Trouve un connecteur logique.", "Separe argument et exemple."], ["La these est l'idee defendue.", "Les arguments soutiennent la these.", "Les exemples illustrent les arguments."])
+          ]
+        }
+      ],
+      lycee: [
+        {
+          key: "analyse",
+          title: "Analyse litteraire",
+          icon: "fa-magnifying-glass-chart",
+          subbranches: ["Figures", "Registres", "Mouvements", "Interpretation"],
+          chapters: [
+            chapter("Figures de style", "Identifier les procedes et expliquer leur effet.", ["Repere une metaphore.", "Explique l'effet d'une anaphore.", "Compare comparaison et personnification."], ["Une figure de style transforme l'expression.", "L'analyse doit lier procede, citation courte et effet.", "Nommer ne suffit pas: il faut interpreter."]),
+            chapter("Registres litteraires", "Reconnaitre le ton dominant d'un texte.", ["Distingue tragique et pathetique.", "Trouve un indice du registre comique.", "Justifie le registre lyrique."], ["Le registre depend des emotions visees.", "Les champs lexicaux donnent des indices.", "Un texte peut melanger plusieurs registres."]),
+            chapter("Parcours d'interpretation", "Construire une lecture organisee du texte.", ["Formule une hypothese de lecture.", "Associe deux procedes a une idee.", "Redige une transition courte."], ["Une interpretation part d'observations precises.", "Les parties doivent progresser.", "Chaque idee doit etre appuyee sur le texte."])
+          ]
+        },
+        {
+          key: "dissertation",
+          title: "Dissertation",
+          icon: "fa-scale-balanced",
+          subbranches: ["Problematique", "Plan", "Arguments", "Exemples"],
+          chapters: [
+            chapter("Analyser un sujet", "Comprendre les mots cles et la consigne.", ["Reformule le sujet.", "Souligne les notions importantes.", "Trouve une tension ou un debat."], ["Un sujet se lit mot par mot.", "La problematique transforme le sujet en question.", "Les exemples doivent etre pertinents."]),
+            chapter("Construire un plan", "Organiser une reponse progressive.", ["Propose deux axes.", "Ajoute une transition.", "Verifie que chaque partie repond au sujet."], ["Le plan suit une logique.", "Chaque partie defend une idee forte.", "La transition explique le passage d'une idee a l'autre."]),
+            chapter("Rediger une introduction", "Presenter, problematiser et annoncer le plan.", ["Ecris une accroche sobre.", "Pose la problematique.", "Annonce deux parties."], ["L'introduction guide le lecteur.", "La problematique est centrale.", "L'annonce de plan doit etre claire et concise."])
+          ]
+        },
+        {
+          key: "commentaire",
+          title: "Commentaire",
+          icon: "fa-file-lines",
+          subbranches: ["Lecture lineaire", "Axes", "Citations", "Redaction"],
+          chapters: [
+            chapter("Lecture lineaire", "Suivre le mouvement du texte.", ["Decoupe un extrait en mouvements.", "Donne un titre a chaque mouvement.", "Associe un procede a chaque partie."], ["Un mouvement correspond a une etape du texte.", "L'ordre du texte aide l'analyse.", "Les procedes doivent servir une interpretation."]),
+            chapter("Citer et analyser", "Utiliser des citations courtes avec precision.", ["Choisis une citation de moins de dix mots.", "Nomme un procede.", "Explique l'effet produit."], ["Une citation doit etre integree.", "L'analyse precise le sens.", "Le commentaire evite la paraphrase."]),
+            chapter("Rediger un paragraphe", "Construire une analyse complete.", ["Commence par une idee directrice.", "Ajoute citation et analyse.", "Termine par une phrase de bilan."], ["Un paragraphe suit idee, preuve, interpretation.", "Les connecteurs clarifient le raisonnement.", "La conclusion partielle relie au projet de lecture."])
+          ]
+        },
+        {
+          key: "langue",
+          title: "Langue",
+          icon: "fa-language",
+          subbranches: ["Syntaxe", "Lexique", "Enonciation", "Revision"],
+          chapters: [
+            chapter("Enonciation", "Identifier locuteur, destinataire et situation.", ["Repere les pronoms personnels.", "Trouve les marques de temps.", "Explique qui parle a qui."], ["L'enonciation situe la parole.", "Les deictiques dependent de la situation.", "Le locuteur peut etre different de l'auteur."]),
+            chapter("Syntaxe de la phrase complexe", "Analyser coordination, juxtaposition et subordination.", ["Separe les propositions.", "Nomme le lien entre deux propositions.", "Transforme une juxtaposition en subordination."], ["La syntaxe montre les relations logiques.", "Les conjonctions signalent souvent le lien.", "Une phrase complexe contient plusieurs noyaux verbaux."]),
+            chapter("Precision du lexique", "Choisir les mots justes pour analyser.", ["Remplace un verbe vague.", "Trouve un synonyme plus precis.", "Classe un champ lexical."], ["Le lexique oriente le sens.", "Un mot precis evite les generalites.", "Le champ lexical revele un theme ou une atmosphere."])
+          ]
+        }
+      ]
+    };
+
+    function chapter(title, goal, exercises, summary) {
+      return { title, goal, exercises, summary };
+    }
+
+    function profileForLevel(level) {
+      if (["ce1", "ce2", "cm1", "cm2"].includes(level)) return "primaire";
+      if (["6eme", "5eme", "4eme", "3eme"].includes(level)) return "college";
+      return "lycee";
+    }
+
+    function getInitialLevel() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("level") || localStorage.getItem("studentLevel") || "6eme";
+    }
+
+    let currentLevel = getInitialLevel();
+    let activeBranch = null;
+
+    function slug(value) {
+      return value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+    }
+
+    function getBranches() {
+      return branchTemplates[profileForLevel(currentLevel)];
+    }
+
+    function render() {
+      const branches = getBranches();
+      activeBranch = activeBranch && branches.some((branch) => branch.key === activeBranch)
+        ? activeBranch
+        : branches[0].key;
+
+      document.getElementById("levelSelect").value = currentLevel;
+      document.getElementById("pageTitle").textContent = `Cours de francais - Niveau ${levels[currentLevel]}`;
+      document.getElementById("pageIntro").textContent = `Parcours adapte au niveau ${levels[currentLevel]} avec branches, sous-branches, resumes et exercices.`;
+      renderBranchTabs(branches);
+      renderBranch(branches.find((branch) => branch.key === activeBranch));
+    }
+
+    function renderBranchTabs(branches) {
+      const tabs = document.getElementById("branchTabs");
+      tabs.innerHTML = "";
+
+      branches.forEach((branch) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = branch.key === activeBranch ? "active" : "";
+        button.innerHTML = `<i class="fas ${branch.icon}"></i> ${branch.title}`;
+        button.addEventListener("click", () => {
+          activeBranch = branch.key;
+          render();
+        });
+        tabs.appendChild(button);
+      });
+    }
+
+    function renderBranch(branch) {
+      const nav = document.getElementById("chapterNav");
+      const content = document.getElementById("courseContent");
+      nav.innerHTML = "";
+
+      if (!branch) {
+        content.innerHTML = `<div class="empty">Aucun contenu disponible pour ce niveau.</div>`;
+        return;
+      }
+
+      branch.chapters.forEach((chapterItem, index) => {
+        const id = `${branch.key}-${slug(chapterItem.title)}`;
+        const link = document.createElement("a");
+        link.href = `#${id}`;
+        link.textContent = `${index + 1}. ${chapterItem.title}`;
+        nav.appendChild(link);
+      });
+
+      content.innerHTML = `
+        <article class="branch-panel">
+          <div class="branch-heading">
+            <div>
+              <p class="panel-kicker">Branche</p>
+              <h2>${branch.title}</h2>
+            </div>
+            <i class="fas ${branch.icon}"></i>
+          </div>
+          <div class="subbranch-list">
+            ${branch.subbranches.map((item) => `<span>${item}</span>`).join("")}
+          </div>
+          <div class="chapter-stack">
+            ${branch.chapters.map((chapterItem, index) => renderChapter(branch, chapterItem, index)).join("")}
+          </div>
+        </article>
+      `;
+    }
+
+    function renderChapter(branch, chapterItem, index) {
+      const id = `${branch.key}-${slug(chapterItem.title)}`;
+      const summaryId = `${id}-summary`;
+      return `
+        <section class="chapter-card" id="${id}">
+          <div class="chapter-top">
+            <div>
+              <p class="panel-kicker">Chapitre ${index + 1}</p>
+              <h3>${chapterItem.title}</h3>
+              <p>${chapterItem.goal}</p>
+            </div>
+            <button class="primary-btn" type="button" onclick="toggleSummary('${summaryId}')">Resume du cours</button>
+          </div>
+          <div class="summary" id="${summaryId}">
+            <ul>
+              ${chapterItem.summary.map((item) => `<li>${item}</li>`).join("")}
+            </ul>
+          </div>
+          <div class="chapter-actions">
+            <button class="light-btn" type="button" onclick="toggleExercises('${id}-exercises')">Voir 3 exercices</button>
+          </div>
+          <ol class="exercise-list summary" id="${id}-exercises">
+            ${chapterItem.exercises.map((exercise, exerciseIndex) => `<li><strong>Exercice ${exerciseIndex + 1}.</strong> ${exercise}</li>`).join("")}
+          </ol>
+        </section>
+      `;
+    }
+
+    function toggleSummary(id) {
+      document.getElementById(id)?.classList.toggle("open");
+    }
+
+    function toggleExercises(id) {
+      document.getElementById(id)?.classList.toggle("open");
+    }
+
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+      const isDark = document.body.classList.contains("dark-mode");
+      document.getElementById("theme-icon").className = isDark ? "fas fa-sun" : "fas fa-moon";
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "dark") {
+        document.body.classList.add("dark-mode");
+        document.getElementById("theme-icon").className = "fas fa-sun";
+      }
+
+      document.getElementById("levelSelect").addEventListener("change", (event) => {
+        currentLevel = event.target.value;
+        localStorage.setItem("studentLevel", currentLevel);
+        activeBranch = null;
+        const url = new URL(window.location.href);
+        url.searchParams.set("level", currentLevel);
+        window.history.replaceState({}, "", url);
+        render();
+      });
+
+      localStorage.setItem("studentLevel", currentLevel);
+      render();
+    });
+  </script>
+</body>
+</html>

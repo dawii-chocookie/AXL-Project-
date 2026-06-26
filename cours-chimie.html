@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chimie - Bases, Acido-basique, Nomenclature organique</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f8f6f1;
+      color: #3c2f2f;
+      margin: 2em 3em;
+      line-height: 1.5;
+    }
+    h1, h2, h3 {
+      color: #5a4333;
+      margin-bottom: 0.5em;
+    }
+    nav {
+      margin-bottom: 2em;
+      background: #d7c5b1;
+      padding: 0.8em 1.2em;
+      border-radius: 10px;
+      box-shadow: 2px 2px 5px #c2b09d;
+    }
+    nav a {
+      color: #5a4333;
+      margin-right: 1.4em;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      text-decoration: underline;
+      color: #7a5a44;
+    }
+    section {
+      background-color: #fff9f1;
+      border-radius: 10px;
+      padding: 1.6em 2em;
+      margin-bottom: 3em;
+      box-shadow: 0 3px 8px rgba(130, 97, 72, 0.15);
+    }
+    ul, ol {
+      margin-left: 1.2em;
+      margin-bottom: 1.2em;
+    }
+    strong {
+      color: #7a5a44;
+    }
+    .answer {
+      background: #e1d3be;
+      border-left: 5px solid #7a5a44;
+      padding: 0.6em 1em;
+      margin-top: 0.4em;
+      font-style: italic;
+      display: none;
+      border-radius: 4px;
+      color: #5a3e31;
+    }
+    .q-btn {
+      background: none;
+      border: none;
+      color: #7a5a44;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1em;
+      padding: 0;
+      margin-top: 0.8em;
+      text-align: left;
+      transition: color 0.3s ease;
+    }
+    .q-btn:hover {
+      color: #5a4333;
+      text-decoration: underline;
+    }
+    code {
+      background: #f1e3d5;
+      padding: 0.1em 0.3em;
+      border-radius: 3px;
+      font-family: monospace;
+      color: #775a3c;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 1em;
+      margin-bottom: 1.2em;
+    }
+    th, td {
+      border: 1px solid #c2b09d;
+      padding: 0.5em 1em;
+      text-align: left;
+    }
+    th {
+      background-color: #d7c5b1;
+    }
+    .exercise {
+      background: #f3e9d1;
+      border-left: 6px solid #7a5a44;
+      padding: 1em;
+      margin-top: 1em;
+      border-radius: 6px;
+    }
+    .exercise h4 {
+      margin-top: 0;
+      color: #5a4333;
+    }
+    .btn-check-answer {
+      background: #7a5a44;
+      color: #fff;
+      border: none;
+      padding: 0.4em 0.8em;
+      font-weight: 600;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 0.6em;
+    }
+    .btn-check-answer:hover {
+      background: #5a4333;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>⚗️ Chimie - Niveau Première</h1>
+
+  <nav>
+    <a href="#bases">1. Bases de la chimie</a>
+    <a href="#acidobase">2. Réactions acide-base & pH</a>
+    <a href="#organique">3. Nomenclature des composés organiques</a>
+  </nav>
+
+  <!-- COURS 1 -->
+  <section id="bases">
+    <h2>1. Bases de la chimie</h2>
+    <p>La chimie est l'étude de la matière, de ses propriétés et de ses transformations. Voici quelques notions essentielles :</p>
+    <ul>
+      <li><strong>Atomes :</strong> constituants fondamentaux de la matière, composés de protons (+), neutrons (neutres) et électrons (-).</li>
+      <li><strong>Molécules :</strong> assemblages d’atomes liés par des liaisons chimiques (covalentes ou ioniques).</li>
+      <li><strong>Éléments chimiques :</strong> types d’atomes classés dans le tableau périodique (ex : carbone C, oxygène O).</li>
+      <li><strong>Équation chimique :</strong> représentation symbolique d’une réaction chimique. Exemple : <code>2H₂ + O₂ → 2H₂O</code>.</li>
+      <li><strong>Masse molaire :</strong> masse d'une mole d’une substance (en g/mol).</li>
+      <li><strong>Concentration molaire :</strong> nombre de moles dissoutes par litre de solution (mol/L).</li>
+    </ul>
+
+    <h3>Questions</h3>
+    <ol>
+      <li>
+        <button class="q-btn">Qu'est-ce qu'un atome ?</button>
+        <div class="answer">La plus petite unité de matière, composée de protons, neutrons et électrons.</div>
+      </li>
+      <li>
+        <button class="q-btn">Quelle est la différence entre un atome et une molécule ?</button>
+        <div class="answer">Un atome est une seule particule, une molécule est un groupe d’atomes liés.</div>
+      </li>
+      <li>
+        <button class="q-btn">Que signifie une équation chimique ?</button>
+        <div class="answer">Elle décrit la transformation des réactifs en produits lors d’une réaction chimique.</div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- COURS 2 -->
+  <section id="acidobase">
+    <h2>2. Réactions acide-base & pH</h2>
+    <p>Une réaction acide-base est un échange de protons entre une espèce acide (donneur de H⁺) et une base (accepteur de H⁺).</p>
+    <ul>
+      <li><strong>Acide :</strong> substance capable de libérer un ion H⁺ en solution.</li>
+      <li><strong>Base :</strong> substance capable de capter un ion H⁺.</li>
+      <li><strong>pH :</strong> mesure de l’acidité d’une solution : <code>pH = -\log[H_3O^+]</code>.</li>
+    </ul>
+
+    <h3>Changements de couleur avec indicateurs</h3>
+    <table>
+      <thead>
+        <tr><th>Indicateur</th><th>Couleur en acide</th><th>Couleur en base</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Phénolphtaléine</td><td>Incolore</td><td>Rose</td></tr>
+        <tr><td>Tournesol</td><td>Rouge</td><td>Bleu</td></tr>
+        <tr><td>Bleu de bromothymol</td><td>Jaune</td><td>Bleu-vert</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Exercice : réaction de neutralisation</h3>
+    <div class="exercise">
+      <p>On mélange 25 mL d’une solution d’acide chlorhydrique (HCl) 0,1 mol/L avec 25 mL d’une solution d’hydroxyde de sodium (NaOH) 0,1 mol/L. Quelle est la nature du mélange final ?</p>
+      <p><strong>Réponds :</strong></p>
+      <input type="text" id="answerNeutralisation" placeholder="Ta réponse ici..." style="width: 100%; padding: 0.5em; margin-top: 0.3em;">
+      <button class="btn-check-answer" onclick="checkNeutralisation()">Vérifier</button>
+      <p id="feedbackNeutralisation" style="margin-top:0.6em; font-weight:600;"></p>
+    </div>
+
+    <h3>Questions</h3>
+    <ol>
+      <li>
+        <button class="q-btn">Que libère un acide en solution aqueuse ?</button>
+        <div class="answer">Un ion H⁺ (proton).</div>
+      </li>
+      <li>
+        <button class="q-btn">Qu’indique une valeur de pH inférieure à 7 ?</button>
+        <div class="answer">Que la solution est acide.</div>
+      </li>
+      <li>
+        <button class="q-btn">Quelle est la couleur de la phénolphtaléine en milieu basique ?</button>
+        <div class="answer">Rose.</div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- COURS 3 -->
+  <section id="organique">
+    <h2>3. Nomenclature des composés organiques : alcanes, alcènes, alcynes</h2>
+    <p>La chimie organique étudie les molécules contenant du carbone. Voici les bases pour les hydrocarbures simples :</p>
+    <ul>
+      <li><strong>Alcanes :</strong> hydrocarbures saturés, chaînes carbones liées par des liaisons simples (C–C). Ex : méthane (CH₄), pentane (C₅H₁₂).</li>
+      <li><strong>Alcènes :</strong> hydrocarbures insaturés avec au moins une double liaison carbone-carbone (C=C). Ex : éthène (C₂H₄), pentène (C₅H₁₀).</li>
+      <li><strong>Alcynes :</strong> hydrocarbures avec une triple liaison carbone-carbone (C≡C). Ex : éthyne (C₂H₂), pentyne (C₅H₈).</li>
+    </ul>
+    <p>Les chaînes peuvent être :</p>
+    <ul>
+      <li><strong>Linéraires :</strong> sans ramifications.</li>
+      <li><strong>Ramifiées :</strong> avec des groupes alkyles en branches (ex : 2-méthylpentane).</li>
+    </ul>
+
+    <h3>Exemple de noms et formules</h3>
+    <table>
+      <thead>
+        <tr><th>Nom</th><th>Formule brute</th><th>Type</th><th>Chaîne</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Pentane</td><td>C₅H₁₂</td><td>Alcane</td><td>Linéraire</td></tr>
+        <tr><td>2-Méthylpentane</td><td>C₆H₁₄</td><td>Alcane</td><td>Ramifiée</td></tr>
+        <tr><td>Pentène</td><td>C₅H₁₀</td><td>Alcène</td><td>Linéraire</td></tr>
+        <tr><td>2-Pentyne</td><td>C₅H₈</td><td>Alcyne</td><td>Linéraire</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Questions</h3>
+    <ol>
+      <li>
+        <button class="q-btn">Quelle est la différence principale entre un alcane et un alcène ?</button>
+        <div class="answer">L’alcane n’a que des liaisons simples C–C, l’alcène a au moins une double liaison C=C.</div>
+      </li>
+      <li>
+        <button class="q-btn">Qu’est-ce qu’une chaîne ramifiée ?</button>
+        <div class="answer">Une chaîne carbonée avec une ou plusieurs branches latérales.</div>
+      </li>
+      <li>
+        <button class="q-btn">Donne la formule brute d’un pentane linéaire.</button>
+        <div class="answer">C₅H₁₂</div>
+      </li>
+    </ol>
+  </section>
+
+  <script>
+    // Questions toggle answers
+    document.querySelectorAll('.q-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        const answer = button.nextElementSibling;
+        if(answer.style.display === 'block'){
+          answer.style.display = 'none';
+        } else {
+          answer.style.display = 'block';
+        }
+      });
+    });
+
+    // Exercice Neutralisation
+    function checkNeutralisation(){
+      const userAnswer = document.getElementById('answerNeutralisation').value.toLowerCase().trim();
+      const feedback = document.getElementById('feedbackNeutralisation');
+
+      // Correct answers include "solution neutre", "neutre", "eau", "solution d'eau", "ph = 7", etc.
+      const correctAnswers = [
+        "solution neutre",
+        "neutre",
+        "ph=7",
+        "ph = 7",
+        "eau",
+        "solution d'eau",
+        "mélange neutre"
+      ];
+
+      if(correctAnswers.some(ans => userAnswer.includes(ans))){
+        feedback.style.color = "green";
+        feedback.textContent = "Bonne réponse ! Le mélange est neutre car les quantités d’acide et de base sont équivalentes.";
+      } else if(userAnswer.length === 0){
+        feedback.style.color = "red";
+        feedback.textContent = "Merci de saisir une réponse.";
+      } else {
+        feedback.style.color = "red";
+        feedback.textContent = "Ce n’est pas la bonne réponse. Essaie encore !";
+      }
+    }
+  </script>
+</body>
+</html>

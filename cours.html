@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AXL - Cours</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+
+    :root {
+      --primary: #F9A8D4;
+      --secondary: #F472B6;
+      --accent: #DB2777;
+      --accent-dark: #9D174D;
+      --background: #F8FAFC;
+      --text: #0F172A;
+      --muted: #64748B;
+      --card: #FFFFFF;
+      --line: rgba(15, 23, 42, 0.1);
+      --shadow: 0 18px 55px rgba(15, 23, 42, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(249, 168, 212, 0.28), transparent 28rem),
+        linear-gradient(180deg, #fff 0%, var(--background) 45%);
+      color: var(--text);
+      font-family: 'Inter', Arial, sans-serif;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    body.dark-mode {
+      --background: #0F172A;
+      --text: #F8FAFC;
+      --muted: #CBD5E1;
+      --card: #1E293B;
+      --line: rgba(248, 250, 252, 0.12);
+      --shadow: 0 22px 60px rgba(0, 0, 0, 0.35);
+      background:
+        radial-gradient(circle at top left, rgba(219, 39, 119, 0.25), transparent 28rem),
+        linear-gradient(180deg, #111827 0%, #0F172A 55%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    button,
+    select,
+    input {
+      font: inherit;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 16px clamp(20px, 5vw, 64px);
+      background: rgba(255, 255, 255, 0.78);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(16px);
+    }
+
+    .dark-mode .navbar {
+      background: rgba(15, 23, 42, 0.82);
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: clamp(14px, 2.5vw, 28px);
+    }
+
+    .nav-links a {
+      position: relative;
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text);
+    }
+
+    .nav-links a::after {
+      position: absolute;
+      right: 0;
+      bottom: -8px;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(135deg, var(--secondary), var(--accent));
+      border-radius: 999px;
+      content: "";
+      opacity: 0;
+      transform: scaleX(0.6);
+      transition: 0.2s ease;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #languageSelect,
+    .icon-button {
+      min-height: 40px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      color: var(--text);
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+    }
+
+    #languageSelect {
+      max-width: 130px;
+      padding: 0 12px;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+
+    .icon-button {
+      width: 42px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(290px, 0.55fr);
+      align-items: center;
+      gap: clamp(28px, 5vw, 70px);
+      padding: clamp(42px, 7vw, 78px) clamp(20px, 5vw, 64px);
+      background:
+        linear-gradient(135deg, rgba(244, 114, 182, 0.95), rgba(249, 168, 212, 0.83)),
+        var(--secondary);
+      color: #28111d;
+    }
+
+    .eyebrow {
+      margin-bottom: 12px;
+      color: var(--accent-dark);
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      max-width: 760px;
+      font-size: clamp(40px, 6vw, 68px);
+      line-height: 1;
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin-top: 20px;
+      color: rgba(40, 17, 29, 0.78);
+      font-size: clamp(17px, 2vw, 22px);
+      line-height: 1.55;
+    }
+
+    .hero-panel {
+      padding: 24px;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(255, 255, 255, 0.68);
+      border-radius: 24px;
+      box-shadow: 0 18px 45px rgba(157, 23, 77, 0.18);
+      color: #28111d;
+    }
+
+    .hero-panel strong {
+      display: block;
+      font-size: 42px;
+      line-height: 1;
+    }
+
+    .hero-panel span {
+      display: block;
+      margin-top: 8px;
+      color: rgba(40, 17, 29, 0.7);
+      font-weight: 700;
+    }
+
+    .hero-panel .panel-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .hero-panel .panel-row div {
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.62);
+      border-radius: 18px;
+    }
+
+    .student-level-box {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(157, 23, 77, 0.16);
+    }
+
+    .student-level-box label {
+      display: block;
+      margin-bottom: 8px;
+      color: rgba(40, 17, 29, 0.72);
+      font-weight: 800;
+    }
+
+    #studentLevelSelect {
+      width: 100%;
+      min-height: 44px;
+      padding: 0 12px;
+      border: 1px solid rgba(157, 23, 77, 0.22);
+      border-radius: 999px;
+      background: #fff;
+      color: #28111d;
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    .toolbar {
+      width: min(1180px, calc(100% - 40px));
+      margin: 34px auto 0;
+      padding: 20px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .search-box {
+      position: relative;
+      margin-bottom: 18px;
+    }
+
+    .search-box i {
+      position: absolute;
+      top: 50%;
+      left: 16px;
+      color: var(--muted);
+      transform: translateY(-50%);
+    }
+
+    .search-box input {
+      width: 100%;
+      min-height: 48px;
+      padding: 0 16px 0 44px;
+      background: var(--background);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--text);
+      outline: none;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .filter-btn {
+      min-height: 42px;
+      padding: 0 18px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--card);
+      color: var(--text);
+      cursor: pointer;
+      font-weight: 800;
+      transition: 0.2s ease;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
+      border-color: transparent;
+      color: #4a1830;
+      transform: translateY(-2px);
+    }
+
+    .courses-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+      width: min(1180px, calc(100% - 40px));
+      margin: 24px auto 0;
+    }
+
+    .course-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 310px;
+      padding: 26px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .course-card:hover {
+      border-color: rgba(219, 39, 119, 0.35);
+      box-shadow: 0 18px 35px rgba(219, 39, 119, 0.14);
+      transform: translateY(-5px);
+    }
+
+    .course-icon {
+      display: grid;
+      width: 56px;
+      height: 56px;
+      margin-bottom: 22px;
+      place-items: center;
+      background: rgba(219, 39, 119, 0.1);
+      border-radius: 18px;
+      color: var(--accent);
+      font-size: 25px;
+    }
+
+    .course-card h3 {
+      margin-bottom: 10px;
+      font-size: 22px;
+    }
+
+    .course-card p {
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .course-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .course-meta span {
+      padding: 7px 10px;
+      background: rgba(219, 39, 119, 0.08);
+      border-radius: 999px;
+      color: var(--accent-dark);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .dark-mode .course-meta span {
+      color: var(--primary);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 46px;
+      margin-top: auto;
+      padding: 0 20px;
+      border: 0;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
+      color: #4a1830;
+      cursor: pointer;
+      font-weight: 800;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-secondary:hover {
+      box-shadow: 0 12px 26px rgba(219, 39, 119, 0.18);
+      transform: translateY(-3px);
+    }
+
+    .empty-state {
+      display: none;
+      width: min(1180px, calc(100% - 40px));
+      margin: 24px auto 0;
+      padding: 30px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(15, 23, 42, 0.5);
+    }
+
+    .modal.open {
+      display: flex;
+    }
+
+    .modal-card {
+      width: min(520px, 100%);
+      padding: 28px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .modal-card h2 {
+      margin-bottom: 10px;
+      font-size: 28px;
+    }
+
+    .modal-card p {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .level-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .level-btn {
+      min-height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--background);
+      color: var(--text);
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    .level-btn:hover {
+      background: rgba(219, 39, 119, 0.1);
+      color: var(--accent);
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 22px;
+    }
+
+    .plain-btn {
+      min-height: 42px;
+      padding: 0 16px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 34px 20px;
+      background: var(--card);
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 980px) {
+      .navbar {
+        align-items: flex-start;
+        flex-wrap: wrap;
+      }
+
+      .nav-links {
+        order: 3;
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 4px;
+      }
+
+      .hero,
+      .courses-list {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero-panel .panel-row,
+      .level-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .toolbar,
+      .courses-list,
+      .empty-state {
+        width: calc(100% - 28px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <a class="logo" href="index.html" aria-label="Accueil AXL">AXL</a>
+
+    <nav aria-label="Navigation principale">
+      <ul class="nav-links">
+        <li><a id="nav-home" href="index.html">Accueil</a></li>
+        <li><a id="nav-courses" class="active" href="cours.html">Cours</a></li>
+        <li><a id="nav-goals" href="objectifs.html">Objectifs</a></li>
+        <li><a id="nav-progress" href="progres.html">Progr&egrave;s</a></li>
+        <li><a id="nav-settings" href="parametres.html">Param&egrave;tres</a></li>
+      </ul>
+    </nav>
+
+    <div class="nav-actions">
+      <select id="languageSelect" aria-label="Choisir la langue">
+        <option value="fr">Fran&ccedil;ais</option>
+        <option value="en">English</option>
+        <option value="es">Espa&ntilde;ol</option>
+        <option value="ht">Krey&ograve;l</option>
+      </select>
+      <button class="icon-button" type="button" onclick="toggleDarkMode()" title="Changer le th&egrave;me" aria-label="Changer le th&egrave;me">
+        <i id="theme-icon" class="fas fa-moon"></i>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <p class="eyebrow" id="hero-eyebrow">Biblioth&egrave;que de cours</p>
+        <h1 id="courses-title">Choisis un cours et avance &agrave; ton rythme</h1>
+        <p id="courses-subtitle">Retrouve tes mati&egrave;res principales, filtre rapidement et lance une activit&eacute; adapt&eacute;e &agrave; ton niveau.</p>
+      </div>
+
+      <aside class="hero-panel" aria-label="Aper&ccedil;u des cours">
+        <strong>5</strong>
+        <span id="panel-title">mati&egrave;res disponibles</span>
+        <div class="panel-row">
+          <div>
+            <strong>12</strong>
+            <span id="panel-quiz">quiz pr&ecirc;ts</span>
+          </div>
+          <div>
+            <strong>75%</strong>
+            <span id="panel-progress">progression</span>
+          </div>
+        </div>
+        <div class="student-level-box">
+          <label for="studentLevelSelect">Ton niveau</label>
+          <select id="studentLevelSelect" aria-label="Choisir ton niveau">
+            <option value="">Choisir un niveau</option>
+          </select>
+        </div>
+      </aside>
+    </section>
+
+    <section class="toolbar" aria-label="Recherche et filtres">
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input id="courseSearch" type="search" placeholder="Rechercher un cours" />
+      </div>
+      <div class="filters">
+        <button class="filter-btn active" id="filter-all" type="button" data-filter="all">Tous</button>
+        <button class="filter-btn" id="filter-maths" type="button" data-filter="maths">Math&eacute;matiques</button>
+        <button class="filter-btn" id="filter-francais" type="button" data-filter="francais">Fran&ccedil;ais</button>
+        <button class="filter-btn" id="filter-histoire" type="button" data-filter="histoire">Histoire</button>
+        <button class="filter-btn" id="filter-sciences" type="button" data-filter="sciences">Sciences</button>
+      </div>
+    </section>
+
+    <section class="courses-list" id="coursesList">
+      <article class="course-card" data-category="maths" data-course="maths algebre mathematiques">
+        <div class="course-icon"><i class="fas fa-square-root-variable"></i></div>
+        <h3 id="course-maths-title">Math&eacute;matiques</h3>
+        <p id="course-maths-desc">Travaille les bases, l'alg&egrave;bre et les exercices progressifs.</p>
+        <div class="course-meta">
+          <span id="course-maths-meta-1">Niveau au choix</span>
+          <span id="course-maths-meta-2">Quiz guid&eacute;</span>
+        </div>
+        <button class="btn-secondary" id="course-maths-button" type="button" onclick="openLevelModal()">Commencer <i class="fas fa-arrow-right"></i></button>
+      </article>
+
+      <article class="course-card" data-category="francais" data-course="francais grammaire ecriture">
+        <div class="course-icon"><i class="fas fa-pen-nib"></i></div>
+        <h3 id="course-grammar-title">Grammaire fran&ccedil;aise</h3>
+        <p id="course-grammar-desc">Ma&icirc;trise les r&egrave;gles essentielles pour mieux comprendre et mieux &eacute;crire.</p>
+        <div class="course-meta">
+          <span id="course-grammar-meta-1">R&egrave;gles claires</span>
+          <span id="course-grammar-meta-2">Exemples</span>
+        </div>
+        <button class="btn-secondary" id="course-grammar-button" type="button" onclick="openLevelModal('french')">Commencer <i class="fas fa-arrow-right"></i></button>
+      </article>
+
+      <article class="course-card" data-category="histoire" data-course="histoire evenements dates">
+        <div class="course-icon"><i class="fas fa-landmark"></i></div>
+        <h3 id="course-history-title">Histoire</h3>
+        <p id="course-history-desc">D&eacute;couvre les grands &eacute;v&eacute;nements et comprends leurs impacts.</p>
+        <div class="course-meta">
+          <span id="course-history-meta-1">Rep&egrave;res</span>
+          <span id="course-history-meta-2">Chronologie</span>
+        </div>
+        <a class="btn-secondary" id="course-history-button" href="cours-histoire.html">Commencer <i class="fas fa-arrow-right"></i></a>
+      </article>
+
+      <article class="course-card" data-category="sciences" data-course="sciences physique forces energie">
+        <div class="course-icon"><i class="fas fa-atom"></i></div>
+        <h3 id="course-physics-title">Physique</h3>
+        <p id="course-physics-desc">Explore les principes fondamentaux de la physique moderne.</p>
+        <div class="course-meta">
+          <span id="course-physics-meta-1">Concepts</span>
+          <span id="course-physics-meta-2">Applications</span>
+        </div>
+        <a class="btn-secondary" id="course-physics-button" href="cours-physique.html">Commencer <i class="fas fa-arrow-right"></i></a>
+      </article>
+
+      <article class="course-card" data-category="sciences" data-course="sciences chimie reactions molecules">
+        <div class="course-icon"><i class="fas fa-flask"></i></div>
+        <h3 id="course-chemistry-title">Chimie</h3>
+        <p id="course-chemistry-desc">Explore les notions de base, les r&eacute;actions et les ph&eacute;nom&egrave;nes cl&eacute;s.</p>
+        <div class="course-meta">
+          <span id="course-chemistry-meta-1">Notions</span>
+          <span id="course-chemistry-meta-2">Exp&eacute;riences</span>
+        </div>
+        <a class="btn-secondary" id="course-chemistry-button" href="cours-chimie.html">Commencer <i class="fas fa-arrow-right"></i></a>
+      </article>
+    </section>
+    <!-- CHATBOT AXL -->
+
+<article class="course-card" 
+data-category="assistant" 
+data-course="chatbot intelligence assistant axl">
+
+
+<div class="course-icon">
+
+<i class="fas fa-robot"></i>
+
+</div>
+
+
+
+<h3>
+Assistant AXL
+</h3>
+
+
+
+<p>
+
+Discute avec AXL, pose tes questions et apprends de nouvelles réponses.
+
+</p>
+
+
+
+<div class="course-meta">
+
+
+<span>
+IA
+</span>
+
+
+<span>
+Assistant
+</span>
+
+
+</div>
+
+
+
+
+<a class="btn-secondary" 
+href="chatbot.html">
+
+
+Ouvrir le chatbot
+
+<i class="fas fa-arrow-right"></i>
+
+
+</a>
+
+
+
+</article>
+
+    <p class="empty-state" id="empty-state">Aucun cours ne correspond &agrave; ta recherche.</p>
+  </main>
+
+  <div class="modal" id="levelModal" role="dialog" aria-modal="true" aria-labelledby="level-title">
+    <div class="modal-card">
+      <h2 id="level-title">Choisis ton niveau</h2>
+      <p id="level-desc">Choisis ton niveau pour ouvrir les cours de maths adaptes.</p>
+      <div class="level-grid" id="levelGrid"></div>
+      <div class="modal-actions">
+        <button class="plain-btn" id="level-cancel" type="button" onclick="closeLevelModal()">Annuler</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p id="footer-text">&copy; 2025 AXL. Tous droits r&eacute;serv&eacute;s.</p>
+  </footer>
+
+  <script>
+    const translations = {
+      fr: {
+        pageTitle: "AXL - Cours",
+        htmlLang: "fr",
+        navHome: "Accueil",
+        navCourses: "Cours",
+        navGoals: "Objectifs",
+        navProgress: "Progr\u00e8s",
+        navSettings: "Param\u00e8tres",
+        heroEyebrow: "Biblioth\u00e8que de cours",
+        coursesTitle: "Choisis un cours et avance \u00e0 ton rythme",
+        coursesSubtitle: "Retrouve tes mati\u00e8res principales, filtre rapidement et lance une activit\u00e9 adapt\u00e9e \u00e0 ton niveau.",
+        panelTitle: "mati\u00e8res disponibles",
+        panelQuiz: "quiz pr\u00eats",
+        panelProgress: "progression",
+        searchPlaceholder: "Rechercher un cours",
+        filterAll: "Tous",
+        filterMaths: "Math\u00e9matiques",
+        filterFrancais: "Fran\u00e7ais",
+        filterHistoire: "Histoire",
+        filterSciences: "Sciences",
+        start: "Commencer",
+        emptyState: "Aucun cours ne correspond \u00e0 ta recherche.",
+        levelTitle: "Choisis ton niveau",
+        levelDesc: "AXL ouvrira le cours d'alg\u00e8bre avec un parcours adapt\u00e9.",
+        levelCancel: "Annuler",
+        footer: "\u00a9 2025 AXL. Tous droits r\u00e9serv\u00e9s.",
+        courses: {
+          maths: ["Math\u00e9matiques", "Travaille les bases, l'alg\u00e8bre et les exercices progressifs.", "Niveau au choix", "Quiz guid\u00e9"],
+          grammar: ["Grammaire fran\u00e7aise", "Ma\u00eetrise les r\u00e8gles essentielles pour mieux comprendre et mieux \u00e9crire.", "R\u00e8gles claires", "Exemples"],
+          history: ["Histoire", "D\u00e9couvre les grands \u00e9v\u00e9nements et comprends leurs impacts.", "Rep\u00e8res", "Chronologie"],
+          physics: ["Physique", "Explore les principes fondamentaux de la physique moderne.", "Concepts", "Applications"],
+          chemistry: ["Chimie", "Explore les notions de base, les r\u00e9actions et les ph\u00e9nom\u00e8nes cl\u00e9s.", "Notions", "Exp\u00e9riences"]
+        }
+      },
+      en: {
+        pageTitle: "AXL - Courses",
+        htmlLang: "en",
+        navHome: "Home",
+        navCourses: "Courses",
+        navGoals: "Goals",
+        navProgress: "Progress",
+        navSettings: "Settings",
+        heroEyebrow: "Course library",
+        coursesTitle: "Choose a course and move at your own pace",
+        coursesSubtitle: "Find your main subjects, filter quickly, and start an activity adapted to your level.",
+        panelTitle: "subjects available",
+        panelQuiz: "quizzes ready",
+        panelProgress: "progress",
+        searchPlaceholder: "Search for a course",
+        filterAll: "All",
+        filterMaths: "Mathematics",
+        filterFrancais: "French",
+        filterHistoire: "History",
+        filterSciences: "Sciences",
+        start: "Start",
+        emptyState: "No course matches your search.",
+        levelTitle: "Choose your level",
+        levelDesc: "AXL will open the algebra course with an adapted path.",
+        levelCancel: "Cancel",
+        footer: "\u00a9 2025 AXL. All rights reserved.",
+        courses: {
+          maths: ["Mathematics", "Practice fundamentals, algebra, and progressive exercises.", "Choose level", "Guided quiz"],
+          grammar: ["French grammar", "Master essential rules to understand better and write better.", "Clear rules", "Examples"],
+          history: ["History", "Discover major events and understand their impacts.", "Key dates", "Timeline"],
+          physics: ["Physics", "Explore the fundamental principles of modern physics.", "Concepts", "Applications"],
+          chemistry: ["Chemistry", "Explore basic notions, reactions, and key phenomena.", "Notions", "Experiments"]
+        }
+      },
+      es: {
+        pageTitle: "AXL - Cursos",
+        htmlLang: "es",
+        navHome: "Inicio",
+        navCourses: "Cursos",
+        navGoals: "Objetivos",
+        navProgress: "Progreso",
+        navSettings: "Ajustes",
+        heroEyebrow: "Biblioteca de cursos",
+        coursesTitle: "Elige un curso y avanza a tu ritmo",
+        coursesSubtitle: "Encuentra tus materias principales, filtra r\u00e1pidamente y empieza una actividad adaptada a tu nivel.",
+        panelTitle: "materias disponibles",
+        panelQuiz: "cuestionarios listos",
+        panelProgress: "progreso",
+        searchPlaceholder: "Buscar un curso",
+        filterAll: "Todos",
+        filterMaths: "Matem\u00e1ticas",
+        filterFrancais: "Franc\u00e9s",
+        filterHistoire: "Historia",
+        filterSciences: "Ciencias",
+        start: "Comenzar",
+        emptyState: "Ning\u00fan curso coincide con tu b\u00fasqueda.",
+        levelTitle: "Elige tu nivel",
+        levelDesc: "AXL abrir\u00e1 el curso de \u00e1lgebra con una ruta adaptada.",
+        levelCancel: "Cancelar",
+        footer: "\u00a9 2025 AXL. Todos los derechos reservados.",
+        courses: {
+          maths: ["Matem\u00e1ticas", "Practica las bases, el \u00e1lgebra y ejercicios progresivos.", "Nivel a elegir", "Cuestionario guiado"],
+          grammar: ["Gram\u00e1tica francesa", "Domina reglas esenciales para comprender y escribir mejor.", "Reglas claras", "Ejemplos"],
+          history: ["Historia", "Descubre grandes acontecimientos y comprende sus impactos.", "Referencias", "Cronolog\u00eda"],
+          physics: ["F\u00edsica", "Explora los principios fundamentales de la f\u00edsica moderna.", "Conceptos", "Aplicaciones"],
+          chemistry: ["Qu\u00edmica", "Explora nociones b\u00e1sicas, reacciones y fen\u00f3menos clave.", "Nociones", "Experimentos"]
+        }
+      },
+      ht: {
+        pageTitle: "AXL - Kou",
+        htmlLang: "ht",
+        navHome: "Ak\u00e8y",
+        navCourses: "Kou",
+        navGoals: "Objektif",
+        navProgress: "Pwogr\u00e8",
+        navSettings: "Param\u00e8t",
+        heroEyebrow: "Bibliyot\u00e8k kou",
+        coursesTitle: "Chwazi yon kou epi avanse nan rit ou",
+        coursesSubtitle: "Jwenn maty\u00e8 prensipal ou yo, filtre rapid, epi lanse yon aktivite ki adapte ak nivo ou.",
+        panelTitle: "maty\u00e8 disponib",
+        panelQuiz: "quiz pare",
+        panelProgress: "pwogr\u00e8",
+        searchPlaceholder: "Ch\u00e8che yon kou",
+        filterAll: "Tout",
+        filterMaths: "Matematik",
+        filterFrancais: "Franse",
+        filterHistoire: "Istwa",
+        filterSciences: "Syans",
+        start: "K\u00f2manse",
+        emptyState: "Pa gen kou ki koresponn ak rech\u00e8ch ou.",
+        levelTitle: "Chwazi nivo ou",
+        levelDesc: "AXL ap ouvri kou alj\u00e8b la ak yon chemen ki adapte.",
+        levelCancel: "Anile",
+        footer: "\u00a9 2025 AXL. Tout dwa rez\u00e8ve.",
+        courses: {
+          maths: ["Matematik", "Travay baz yo, alj\u00e8b ak egz\u00e8sis pwogresif.", "Nivo ou chwazi", "Quiz gide"],
+          grammar: ["Gram\u00e8 franse", "Metrize r\u00e8g enp\u00f2tan yo pou konprann pi byen epi ekri pi byen.", "R\u00e8g kl\u00e8", "Egzanp"],
+          history: ["Istwa", "Dekouvri gwo ev\u00e8nman yo epi konprann enpak yo.", "Dat enp\u00f2tan", "Kwonoloji"],
+          physics: ["Fizik", "Eksplore prensip fondamantal fizik mod\u00e8n yo.", "Kons\u00e8p", "Aplikasyon"],
+          chemistry: ["Chimi", "Eksplore nosyon debaz yo, reyaksyon yo ak fenom\u00e8n kle yo.", "Nosyon", "Eksperyans"]
+        }
+      }
+    };
+
+    const textBindings = {
+      "nav-home": "navHome",
+      "nav-courses": "navCourses",
+      "nav-goals": "navGoals",
+      "nav-progress": "navProgress",
+      "nav-settings": "navSettings",
+      "hero-eyebrow": "heroEyebrow",
+      "courses-title": "coursesTitle",
+      "courses-subtitle": "coursesSubtitle",
+      "panel-title": "panelTitle",
+      "panel-quiz": "panelQuiz",
+      "panel-progress": "panelProgress",
+      "filter-all": "filterAll",
+      "filter-maths": "filterMaths",
+      "filter-francais": "filterFrancais",
+      "filter-histoire": "filterHistoire",
+      "filter-sciences": "filterSciences",
+      "empty-state": "emptyState",
+      "level-title": "levelTitle",
+      "level-desc": "levelDesc",
+      "level-cancel": "levelCancel",
+      "footer-text": "footer"
+    };
+
+    const courseBindings = {
+      maths: ["course-maths-title", "course-maths-desc", "course-maths-meta-1", "course-maths-meta-2"],
+      grammar: ["course-grammar-title", "course-grammar-desc", "course-grammar-meta-1", "course-grammar-meta-2"],
+      history: ["course-history-title", "course-history-desc", "course-history-meta-1", "course-history-meta-2"],
+      physics: ["course-physics-title", "course-physics-desc", "course-physics-meta-1", "course-physics-meta-2"],
+      chemistry: ["course-chemistry-title", "course-chemistry-desc", "course-chemistry-meta-1", "course-chemistry-meta-2"]
+    };
+
+    const levels = ["ce1", "ce2", "cm1", "cm2", "6eme", "5eme", "4eme", "3eme", "seconde", "premiere", "terminale"];
+    const levelLabels = {
+      ce1: "CE1",
+      ce2: "CE2",
+      cm1: "CM1",
+      cm2: "CM2",
+      "6eme": "6eme",
+      "5eme": "5eme",
+      "4eme": "4eme",
+      "3eme": "3eme",
+      seconde: "Seconde",
+      premiere: "Premiere",
+      terminale: "Terminale"
+    };
+    let activeFilter = "all";
+    let activeLevelCourse = "maths";
+
+    function currentLanguage() {
+      return document.getElementById("languageSelect").value || "fr";
+    }
+
+    function t() {
+      return translations[currentLanguage()] || translations.fr;
+    }
+
+    function setText(id, value) {
+      const element = document.getElementById(id);
+      if (element) {
+        element.textContent = value;
+      }
+    }
+
+    function setButtonLabels(label) {
+      ["course-maths-button", "course-grammar-button", "course-history-button", "course-physics-button", "course-chemistry-button"].forEach((id) => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.innerHTML = `${label} <i class="fas fa-arrow-right"></i>`;
+        }
+      });
+    }
+
+    function changeLanguage() {
+      const dict = t();
+      document.documentElement.lang = dict.htmlLang;
+      document.title = dict.pageTitle;
+
+      Object.entries(textBindings).forEach(([id, key]) => setText(id, dict[key]));
+      document.getElementById("courseSearch").placeholder = dict.searchPlaceholder;
+
+      Object.entries(courseBindings).forEach(([courseKey, ids]) => {
+        dict.courses[courseKey].forEach((value, index) => setText(ids[index], value));
+      });
+
+      setButtonLabels(dict.start);
+      renderLevels();
+      applyFilters();
+    }
+
+    function renderLevels() {
+      const grid = document.getElementById("levelGrid");
+      grid.innerHTML = "";
+
+      levels.forEach((level) => {
+        const button = document.createElement("button");
+        button.className = "level-btn";
+        button.type = "button";
+        button.textContent = levelLabels[level];
+        button.addEventListener("click", () => selectLevel(level));
+        grid.appendChild(button);
+      });
+    }
+
+    function renderStudentLevelSelect() {
+      const select = document.getElementById("studentLevelSelect");
+      const savedLevel = localStorage.getItem("studentLevel") || "";
+      select.innerHTML = '<option value="">Choisir un niveau</option>';
+
+      levels.forEach((level) => {
+        const option = document.createElement("option");
+        option.value = level;
+        option.textContent = levelLabels[level];
+        select.appendChild(option);
+      });
+
+      select.value = levels.includes(savedLevel) ? savedLevel : "";
+    }
+
+    function applyFilters() {
+      const search = document.getElementById("courseSearch").value.trim().toLowerCase();
+      const cards = document.querySelectorAll(".course-card");
+      let visibleCount = 0;
+
+      cards.forEach((card) => {
+        const matchesCategory = activeFilter === "all" || card.dataset.category === activeFilter;
+        const matchesSearch = !search || card.textContent.toLowerCase().includes(search) || card.dataset.course.includes(search);
+        const visible = matchesCategory && matchesSearch;
+        card.style.display = visible ? "flex" : "none";
+        if (visible) visibleCount += 1;
+      });
+
+      document.getElementById("empty-state").style.display = visibleCount ? "none" : "block";
+    }
+
+    function openLevelModal(course = "maths") {
+      activeLevelCourse = course;
+      const dict = t();
+      const levelDesc = document.getElementById("level-desc");
+      levelDesc.textContent = course === "french"
+        ? "AXL ouvrira le cours de francais avec un parcours adapte."
+        : dict.levelDesc;
+
+      const savedLevel = localStorage.getItem("studentLevel");
+      if (levels.includes(savedLevel)) {
+        openCourseForLevel(savedLevel);
+        return;
+      }
+
+      document.getElementById("levelModal").classList.add("open");
+    }
+
+    function closeLevelModal() {
+      document.getElementById("levelModal").classList.remove("open");
+    }
+
+    function selectLevel(level) {
+      localStorage.setItem("studentLevel", level);
+      renderStudentLevelSelect();
+      openCourseForLevel(level);
+    }
+
+    function openCourseForLevel(level) {
+      const target = activeLevelCourse === "french" ? "cours-grammaire.html" : "cours-algebre.html";
+      window.location.href = `${target}?level=${encodeURIComponent(level)}`;
+    }
+
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+      const icon = document.getElementById("theme-icon");
+      const isDark = document.body.classList.contains("dark-mode");
+      icon.classList.toggle("fa-moon", !isDark);
+      icon.classList.toggle("fa-sun", isDark);
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "dark") {
+        document.body.classList.add("dark-mode");
+        document.getElementById("theme-icon").classList.replace("fa-moon", "fa-sun");
+      }
+
+      const savedLang = localStorage.getItem("language") || "fr";
+      document.getElementById("languageSelect").value = savedLang;
+      changeLanguage();
+      renderStudentLevelSelect();
+
+      document.getElementById("studentLevelSelect").addEventListener("change", (event) => {
+        const level = event.target.value;
+        if (level) {
+          localStorage.setItem("studentLevel", level);
+        } else {
+          localStorage.removeItem("studentLevel");
+        }
+      });
+
+      document.getElementById("languageSelect").addEventListener("change", (event) => {
+        localStorage.setItem("language", event.target.value);
+        changeLanguage();
+      });
+
+      document.getElementById("courseSearch").addEventListener("input", applyFilters);
+
+      document.querySelectorAll(".filter-btn").forEach((button) => {
+        button.addEventListener("click", () => {
+          activeFilter = button.dataset.filter;
+          document.querySelectorAll(".filter-btn").forEach((item) => item.classList.remove("active"));
+          button.classList.add("active");
+          applyFilters();
+        });
+      });
+
+      document.getElementById("levelModal").addEventListener("click", (event) => {
+        if (event.target.id === "levelModal") {
+          closeLevelModal();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

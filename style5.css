@@ -1,0 +1,468 @@
+/* --------------------
+   Variables et thèmes
+--------------------- */
+:root {
+  --font: 'Georgia', serif;
+
+  /* Thème clair – bibliothèque ancienne */
+  --bg-light: #f7f2e8;
+  --text-light: #3e2f1c;
+  --accent-light: #8b5e3c; /* bois verni */
+  --input-bg-light: #fffaf0;
+
+  /* Thème sombre – chocolat */
+  --bg-dark: #2b1d16;
+  --text-dark: #f3e8d2;
+  --accent-dark: #5a3925;
+  --input-bg-dark: #3a2a21;
+
+  --transition-speed: 0.3s;
+}
+
+body.light-mode {
+  background-color: var(--bg-light);
+  color: var(--text-light);
+  font-family: var(--font);
+}
+
+body.dark-mode {
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
+  font-family: var(--font);
+}
+
+.login-container {
+  max-width: 400px;
+  margin: 5% auto;
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  transition: background-color var(--transition-speed);
+}
+
+body.dark-mode .login-container {
+  background-color: var(--input-bg-dark);
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.input-group {
+  margin-bottom: 1rem;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: var(--input-bg-light);
+  transition: background-color var(--transition-speed);
+}
+
+body.dark-mode .input-group input {
+  background-color: var(--input-bg-dark);
+  border-color: #5a3925;
+  color: var(--text-dark);
+}
+
+.password-wrapper {
+  position: relative;
+}
+
+.password-wrapper i.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 12px;
+  cursor: pointer;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-login {
+  width: 100%;
+  padding: 0.7rem;
+  background-color: var(--accent-light);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+body.dark-mode .btn-login {
+  background-color: var(--accent-dark);
+}
+
+.login-links, .social-login, .qr-login {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.login-links a {
+  display: block;
+  margin-top: 0.4rem;
+  color: var(--accent-light);
+  text-decoration: none;
+}
+
+body.dark-mode .login-links a {
+  color: var(--accent-dark);
+}
+
+.language-selector, .theme-toggle, .theme-customizer {
+  position: fixed;
+  top: 1rem;
+}
+
+.theme-toggle {
+  right: 1rem;
+}
+
+.language-selector {
+  left: 1rem;
+}
+
+.chatbot {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+}
+
+/* --- Chatbot esthétique --- */
+.chatbot {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+#chatbot-toggle {
+  background-color: var(--accent-light);
+  color: white;
+  border: none;
+  padding: 0.7rem 1rem;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+body.dark-mode #chatbot-toggle {
+  background-color: var(--accent-dark);
+}
+
+#chatbot-toggle:hover {
+  transform: translateY(-2px);
+}
+
+#chatbot-window {
+  background-color: #fff;
+  color: #333;
+  width: 260px;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.25);
+  margin-bottom: 10px;
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: all 0.4s ease;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+body.dark-mode #chatbot-window {
+  background-color: #3a2a21;
+  color: var(--text-dark);
+}
+
+#chatbot-window.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.messages p {
+  margin: 0.5rem 0;
+}
+
+.messages .error {
+  color: red;
+}
+
+.messages .success {
+  color: green;
+}
+.language-selector {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 1001;
+}
+
+.language-selector select {
+  background-color: var(--input-bg-light);
+  border: 1.5px solid var(--accent-light);
+  border-radius: 8px;
+  padding: 0.35rem 1rem;
+  font-family: var(--font);
+  font-size: 0.9rem;
+  color: var(--text-light);
+  cursor: pointer;
+  box-shadow: 2px 2px 6px rgba(139, 94, 60, 0.4);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  appearance: none; /* retire la flèche native */
+  background-image:
+    url("data:image/svg+xml;utf8,<svg fill='%238b5e3c' height='12' viewBox='0 0 24 24' width='12' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>"); /* flèche personnalisée */
+  background-repeat: no-repeat;
+  background-position: right 0.8rem center;
+  background-size: 12px 12px;
+}
+
+.language-selector select:hover,
+.language-selector select:focus {
+  border-color: #a9744f;
+  box-shadow: 2px 2px 10px rgba(169, 116, 79, 0.6);
+  outline: none;
+  color: #6b4c2d;
+}
+
+body.dark-mode .language-selector select {
+  background-color: var(--input-bg-dark);
+  border-color: var(--accent-dark);
+  color: var(--text-dark);
+  box-shadow: 2px 2px 6px rgba(74, 47, 35, 0.6);
+  background-image:
+    url("data:image/svg+xml;utf8,<svg fill='%234b2f23' height='12' viewBox='0 0 24 24' width='12' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+}
+
+body.dark-mode .language-selector select:hover,
+body.dark-mode .language-selector select:focus {
+  border-color: #5a3925;
+  box-shadow: 2px 2px 12px rgba(90, 57, 37, 0.8);
+  color: #8b6e55;
+}
+:root {
+  --accent-light: #8b5e3c; /* couleur bois verni clair */
+  --accent-dark: #4a2f23;  /* couleur chocolat foncé */
+  --input-bg-light: #f3e6d7;
+  --input-bg-dark: #5e4b3c;
+  --text-light: #6b4c2d;
+  --text-dark: #d4c8b8;
+  --font: 'Georgia', serif;
+}
+
+/* Chatbot container */
+.chatbot {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+/* Bouton toggle */
+#chatbot-toggle {
+  background-color: var(--accent-light);
+  color: white;
+  border: none;
+  padding: 0.7rem 1.2rem;
+  border-radius: 50px;
+  cursor: pointer;
+  font-family: var(--font);
+  font-size: 0.95rem;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+#chatbot-toggle:hover {
+  background-color: #a9744f;
+}
+
+body.dark-mode #chatbot-toggle {
+  background-color: var(--accent-dark);
+}
+
+body.dark-mode #chatbot-toggle:hover {
+  background-color: #5a3925;
+}
+
+/* Fenêtre chatbot */
+.chatbot-window {
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  background-color: #fff;
+  color: #333;
+  width: 280px;
+  padding: 1rem 1.2rem;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.25);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: all 0.4s ease;
+  font-family: var(--font);
+  font-size: 0.9rem;
+  line-height: 1.4;
+  z-index: 999;
+}
+
+body.dark-mode .chatbot-window {
+  background-color: #3a2a21;
+  color: var(--text-dark);
+}
+
+/* Quand visible */
+.chatbot-window.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* Bouton aide dans chatbot */
+.btn-help {
+  margin-top: 0.8rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--accent-light);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: var(--font);
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 8px rgba(139, 94, 60, 0.4);
+}
+
+.btn-help:hover {
+  background-color: #a9744f;
+}
+
+body.dark-mode .btn-help {
+  background-color: var(--accent-dark);
+  box-shadow: 0 2px 8px rgba(74, 47, 35, 0.6);
+}
+
+body.dark-mode .btn-help:hover {
+  background-color: #5a3925;
+}
+
+
+
+// help 
+
+.help-container {
+  max-width: 700px;
+  margin: 80px auto;
+  padding: 2rem;
+  background-color: var(--input-bg-light);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(139, 94, 60, 0.25);
+  font-family: var(--font);
+  color: var(--text-light);
+}
+
+body.dark-mode .help-container {
+  background-color: #3b2c23;
+  color: var(--text-dark);
+  box-shadow: 0 8px 24px rgba(50, 30, 20, 0.6);
+}
+
+.help-container h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.faq h2 {
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
+  color: var(--accent-light);
+}
+
+body.dark-mode .faq h2 {
+  color: var(--accent-dark);
+}
+
+.btn-return {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 0.6rem 1.2rem;
+  background-color: var(--accent-light);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-return:hover {
+  background-color: #a9744f;
+}
+
+body.dark-mode .btn-return {
+  background-color: var(--accent-dark);
+}
+
+body.dark-mode .btn-return:hover {
+  background-color: #5a3925;
+}
+
+✅ 2. CSS — ajoute ou complète dans style.css :
+css
+Copy
+Edit
+/* Bouton esthétique centré */
+.btn-return-home {
+  background-color: var(--accent-light);
+  color: white;
+  text-decoration: none;
+  border-radius: 30px;
+  padding: 0.6rem 1.5rem;
+  font-family: var(--font);
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 12px rgba(139, 94, 60, 0.25);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-return-home:hover {
+  background-color: #a9744f;
+  transform: translateY(-2px);
+}
+
+.btn-return-home .icon {
+  font-size: 1.1rem;
+}
+
+body.dark-mode .btn-return-home {
+  background-color: var(--accent-dark);
+  color: var(--text-dark);
+  box-shadow: 0 4px 12px rgba(74, 47, 35, 0.4);
+}
+
+body.dark-mode .btn-return-home:hover {
+  background-color: #5a3925;
+}
+
+/* Centrage haut */
+.top-center {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AXL - Objectifs</title>
+  <link rel="stylesheet" href="style2.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script defer src="script2.js"></script>
+</head>
+<body>
+  <header class="app-header">
+    <nav class="navbar" aria-label="Navigation principale">
+      <a class="logo" href="index.html">AXL</a>
+      <button class="menu-toggle" type="button" aria-label="Afficher le menu">
+        <i class="fas fa-bars"></i>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="cours.html">Cours</a></li>
+        <li><a class="active" href="objectifs.html">Objectifs</a></li>
+        <li><a href="progres.html">Progr&egrave;s</a></li>
+        <li><a href="parametres.html">Param&egrave;tres</a></li>
+      </ul>
+      <button id="theme-toggle" class="icon-button" type="button" title="Changer le theme" aria-label="Changer le theme">
+        <i class="fas fa-moon"></i>
+      </button>
+    </nav>
+  </header>
+
+  <main class="objectives-page">
+    <section class="planner-hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Espace objectifs</p>
+        <h1>Planifie ta semaine sans te disperser.</h1>
+        <p>Fixe une intention, transforme-la en actions, puis suis ce qui avance vraiment.</p>
+      </div>
+
+      <div class="hero-focus">
+        <div class="focus-topline">
+          <span>Objectif principal</span>
+          <i class="fas fa-bullseye"></i>
+        </div>
+        <form id="main-goal-form" class="hero-goal-form">
+          <label class="sr-only" for="main-goal">Objectif principal</label>
+          <input type="text" id="main-goal" placeholder="Exemple : valider mon chapitre d'algebre" autocomplete="off" />
+          <button type="submit">Definir</button>
+        </form>
+        <div id="main-goal-display" class="main-goal-display empty">Aucun objectif principal.</div>
+      </div>
+    </section>
+
+    <section class="summary-strip" aria-label="Resume de progression">
+      <article>
+        <i class="fas fa-check"></i>
+        <div><strong id="summary-completed">0</strong><span>Termines</span></div>
+      </article>
+      <article>
+        <i class="fas fa-list"></i>
+        <div><strong id="summary-total">0</strong><span>Taches</span></div>
+      </article>
+      <article>
+        <i class="fas fa-calendar-day"></i>
+        <div><strong id="summary-today">0</strong><span>Aujourd'hui</span></div>
+      </article>
+      <article>
+        <i class="fas fa-chart-simple"></i>
+        <div><strong id="summary-rate">0%</strong><span>Progression</span></div>
+      </article>
+    </section>
+
+    <section class="dashboard-grid">
+      <article class="panel intention-panel">
+        <div class="panel-header">
+          <div>
+            <p class="panel-kicker">Direction</p>
+            <h2>Intention du mois</h2>
+          </div>
+          <i class="fas fa-compass"></i>
+        </div>
+        <form id="intention-form" class="stacked-form">
+          <label for="monthly-intention">Phrase courte qui guide tes efforts</label>
+          <textarea id="monthly-intention" rows="4" placeholder="Ce mois-ci, je veux..."></textarea>
+          <button type="submit"><i class="fas fa-check"></i> Enregistrer</button>
+        </form>
+        <div id="intention-display" class="note-box empty">Aucune intention enregistree.</div>
+      </article>
+
+      <article class="panel tasks-panel">
+        <div class="panel-header">
+          <div>
+            <p class="panel-kicker">Actions</p>
+            <h2>Taches prioritaires</h2>
+          </div>
+          <i class="fas fa-list-check"></i>
+        </div>
+
+        <form id="task-form" class="task-form">
+          <label class="sr-only" for="task-input">Nouvelle tache</label>
+          <input type="text" id="task-input" placeholder="Ajouter une action concrete..." autocomplete="off" />
+          <select id="task-priority" aria-label="Priorite">
+            <option value="high">Important</option>
+            <option value="medium" selected>Normal</option>
+            <option value="low">Leger</option>
+          </select>
+          <input type="date" id="task-due" aria-label="Date limite" />
+          <button type="submit"><i class="fas fa-plus"></i> Ajouter</button>
+        </form>
+
+        <div class="quick-add" aria-label="Raccourcis de taches">
+          <button type="button" data-template="Reviser 20 minutes">Reviser 20 min</button>
+          <button type="button" data-template="Faire un quiz">Faire un quiz</button>
+          <button type="button" data-template="Relire mes notes">Relire notes</button>
+        </div>
+
+        <div class="task-filters" aria-label="Filtres des taches">
+          <button class="active" type="button" data-filter="all">Toutes</button>
+          <button type="button" data-filter="active">A faire</button>
+          <button type="button" data-filter="today">Aujourd'hui</button>
+          <button type="button" data-filter="done">Terminees</button>
+        </div>
+
+        <ul id="task-list" class="task-list"></ul>
+      </article>
+
+      <article class="panel calendar-panel">
+        <div class="panel-header">
+          <div>
+            <p class="panel-kicker">Calendrier</p>
+            <h2>Objectifs dates</h2>
+          </div>
+          <i class="fas fa-calendar-days"></i>
+        </div>
+        <div class="calendar-header">
+          <button id="prev-month" class="icon-button light" type="button" aria-label="Mois precedent">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <h3 id="calendar-title"></h3>
+          <button id="next-month" class="icon-button light" type="button" aria-label="Mois suivant">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+        <div class="calendar-days" aria-hidden="true">
+          <span>Lu</span><span>Ma</span><span>Me</span><span>Je</span><span>Ve</span><span>Sa</span><span>Di</span>
+        </div>
+        <div id="calendar-grid" class="calendar-grid"></div>
+
+        <div id="daily-panel" class="daily-panel">
+          <h4 id="selected-date-label">Selectionne une date</h4>
+          <form id="daily-form" class="inline-form">
+            <label class="sr-only" for="daily-input">Objectif date</label>
+            <input type="text" id="daily-input" placeholder="Objectif pour cette date..." autocomplete="off" />
+            <button type="submit"><i class="fas fa-plus"></i> Ajouter</button>
+          </form>
+          <ul id="daily-list" class="task-list compact"></ul>
+        </div>
+      </article>
+
+      <article class="panel progress-panel">
+        <div class="panel-header">
+          <div>
+            <p class="panel-kicker">Suivi</p>
+            <h2>Avancement</h2>
+          </div>
+          <i class="fas fa-chart-line"></i>
+        </div>
+        <div class="progress-card">
+          <div class="progress-ring">
+            <span id="ring-rate">0%</span>
+          </div>
+          <div>
+            <p>Progression generale</p>
+            <div class="progress-bar" aria-label="Progression des taches">
+              <span id="progress-fill"></span>
+            </div>
+          </div>
+        </div>
+        <div class="stats-grid">
+          <div><strong id="completed-goals">0</strong><span>Terminees</span></div>
+          <div><strong id="pending-goals">0</strong><span>Restantes</span></div>
+          <div><strong id="dated-goals">0</strong><span>Datees</span></div>
+        </div>
+      </article>
+
+      <article class="panel upcoming-panel">
+        <div class="panel-header">
+          <div>
+            <p class="panel-kicker">Prochaines etapes</p>
+            <h2>A venir</h2>
+          </div>
+          <i class="fas fa-clock"></i>
+        </div>
+        <ul id="upcoming-list" class="archive-list"></ul>
+      </article>
+
+      <article class="panel archives-panel">
+        <div class="panel-header">
+          <div>
+            <p class="panel-kicker">Historique</p>
+            <h2>Archives</h2>
+          </div>
+          <button id="clear-archives" class="text-button" type="button">Vider</button>
+        </div>
+        <ul id="archive-list" class="archive-list"></ul>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

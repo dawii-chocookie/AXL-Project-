@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AXL - Ton assistant intelligent</title>
+  <link rel="stylesheet" href="style1.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body class="light-mode">
+  <header class="hero">
+    <nav class="navbar">
+      <div class="logo">AXL</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="cours.html">Cours</a></li>
+        <li><a href="objectifs.html">Objectifs</a></li>
+        <li><a href="progres.html">Progrès</a></li>
+        <li><a href="parametres.html">Paramètres</a></li>
+        <li>
+          <select id="languageSelect" onchange="changeLanguage()">
+            <option value="fr">Français</option>
+            <option value="en">English</option>
+            <option value="es">Español</option>
+          </select>
+        </li>
+        <li>
+          <button onclick="toggleDarkMode()" title="Changer le thème">
+            <i class="fas fa-moon"></i>
+          </button>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="hero-content">
+      <h1 id="main-title"><strong>Bienvenue sur AXL, ton assistant intelligent</strong></h1>
+      <p id="slogan">Choisis une action ci-dessous pour commencer ta journée !</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="features">
+      <div class="feature-card">
+        <h2>📚 <span id="option-revise" href="revisions.html">Réviser une matière</span></h2>
+        <p id="desc-revise">Choisis une matière et commence à apprendre avec des fiches, résumés ou vidéos.</p>
+      </div>
+      <div class="feature-card">
+        <h2>🧠 <span id="option-quiz">Faire un quiz</span></h2>
+        <p id="desc-quiz">Teste tes connaissances avec un quiz adapté à ton niveau.</p>
+      </div>
+      <div class="feature-card">
+        <h2>🎯 <span id="option-goal"> <a href="objectifs.html">Fixer un objectif</a></span></h2>
+        <p id="desc-goal">Planifie ta réussite en définissant un objectif pour aujourd’hui ou la semaine.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 AXL. Tous droits réservés.</p>
+  </footer>
+
+  <script src="script1.js"></script>
+</body>
+</html>

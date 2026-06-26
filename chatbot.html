@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AXL Assistant</title>
+
+
+<style>
+
+/* =====================
+   THEME AXL ROSE
+===================== */
+
+
+*{
+    box-sizing:border-box;
+}
+
+
+body{
+
+    margin:0;
+    min-height:100vh;
+
+    font-family:Arial, sans-serif;
+
+    background:#fff1f6;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+}
+
+
+
+/* carte principale */
+
+.chat-container{
+
+    width:420px;
+    height:600px;
+
+    background:#ffffff;
+
+    border-radius:25px;
+
+    overflow:hidden;
+
+    box-shadow:0 10px 30px rgba(214,51,132,0.25);
+
+    display:flex;
+    flex-direction:column;
+
+}
+
+
+
+/* header AXL */
+
+.header{
+
+    background:linear-gradient(
+        135deg,
+        #d63384,
+        #ff8fc7
+    );
+
+    color:white;
+
+    padding:25px;
+
+    text-align:center;
+
+    font-size:25px;
+
+    font-weight:bold;
+
+}
+
+
+
+
+
+/* messages */
+
+.messages{
+
+    flex:1;
+
+    padding:20px;
+
+    overflow-y:auto;
+
+    background:#fff8fb;
+
+}
+
+
+
+
+
+.bot,
+.user{
+
+    max-width:75%;
+
+    padding:12px 16px;
+
+    margin:12px 0;
+
+    border-radius:20px;
+
+    line-height:1.4;
+
+}
+
+
+
+/* AXL */
+
+.bot{
+
+    background:linear-gradient(
+        135deg,
+        #d63384,
+        #ff69b4
+    );
+
+    color:white;
+
+    border-bottom-left-radius:5px;
+
+}
+
+
+
+
+
+/* utilisateur */
+
+.user{
+
+    background:#ffd6e9;
+
+    color:#7a1748;
+
+    margin-left:auto;
+
+    text-align:right;
+
+    border-bottom-right-radius:5px;
+
+}
+
+
+
+
+
+
+/* zone saisie */
+
+.input-box{
+
+    display:flex;
+
+    padding:15px;
+
+    gap:10px;
+
+    border-top:1px solid #ffd1e4;
+
+    background:white;
+
+}
+
+
+
+
+
+
+input{
+
+    flex:1;
+
+    height:45px;
+
+    border-radius:30px;
+
+    border:1px solid #ffb6d5;
+
+    padding:0 20px;
+
+    outline:none;
+
+    background:#fff;
+
+}
+
+
+
+
+
+
+button{
+
+    width:50px;
+
+    height:45px;
+
+    border:none;
+
+    border-radius:50%;
+
+
+    background:#d63384;
+
+
+    color:white;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+}
+
+
+
+
+button:hover{
+
+    background:#ff69b4;
+
+}
+
+
+
+
+</style>
+
+</head>
+
+
+
+
+<body>
+
+
+
+
+<div class="chat-container">
+
+
+
+<div class="header">
+
+🤖 AXL Assistant
+
+</div>
+
+
+
+
+
+<div class="messages" id="messages">
+
+
+<div class="bot">
+
+Bonjour 👋 Je suis AXL.<br>
+Pose-moi une question.
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="input-box">
+
+
+<input 
+id="input"
+placeholder="Écris un message..."
+>
+
+
+
+<button onclick="sendMessage()">
+
+➤
+
+</button>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<script>
+
+
+// ======================
+// MEMOIRE AXL
+// ======================
+
+
+
+let memory = 
+JSON.parse(localStorage.getItem("axlMemory")) || {};
+
+
+
+let learning = null;
+
+
+
+
+
+
+
+
+function sendMessage(){
+
+
+let input =
+document.getElementById("input");
+
+
+
+let text =
+input.value.trim().toLowerCase();
+
+
+
+if(text==="")
+return;
+
+
+
+
+addMessage(text,"user");
+
+
+
+input.value="";
+
+
+
+
+
+
+
+// AXL apprend
+
+
+if(learning){
+
+
+memory[learning]=text;
+
+
+
+localStorage.setItem(
+"axlMemory",
+JSON.stringify(memory)
+);
+
+
+
+reply(
+"Merci 😊 J'ai appris cette réponse."
+);
+
+
+
+learning=null;
+
+
+return;
+
+}
+
+
+
+
+
+
+
+
+
+
+// réponses simples
+
+
+
+if(
+text.includes("bonjour") ||
+text.includes("salut")
+){
+
+
+reply(
+"Bonjour 👋 Content de te voir !"
+);
+
+
+}
+
+
+
+
+
+else if(
+text.includes("comment ça va") ||
+text.includes("comment ca va")
+){
+
+
+reply(
+"Je vais très bien 🤖 Merci de demander."
+);
+
+
+}
+
+
+
+
+
+
+else if(
+text.includes("ton nom") ||
+text.includes("qui es tu")
+){
+
+
+reply(
+"Je suis AXL, ton assistant intelligent 📚"
+);
+
+
+}
+
+
+
+
+
+
+else if(
+text.includes("merci")
+){
+
+
+reply(
+"Avec plaisir 😊"
+);
+
+
+}
+
+
+
+
+
+
+
+// réponse apprise
+
+
+else if(memory[text]){
+
+
+reply(
+memory[text]
+);
+
+
+}
+
+
+
+
+
+
+// inconnue
+
+
+else{
+
+
+learning=text;
+
+
+
+reply(
+
+"Je ne connais pas encore cette réponse 🤔.<br><br>"+
+"Donne-moi la bonne réponse et je vais l'apprendre."
+
+);
+
+
+}
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+function addMessage(text,type){
+
+
+
+let div =
+document.createElement("div");
+
+
+
+div.className=type;
+
+
+
+div.innerHTML=text;
+
+
+
+document
+.getElementById("messages")
+.appendChild(div);
+
+
+
+
+document
+.getElementById("messages")
+.scrollTop =
+document
+.getElementById("messages")
+.scrollHeight;
+
+
+}
+
+
+
+
+
+
+
+
+
+function reply(text){
+
+
+setTimeout(()=>{
+
+
+addMessage(
+text,
+"bot"
+);
+
+
+
+},500);
+
+
+
+}
+
+
+
+
+
+
+
+
+document
+.getElementById("input")
+.addEventListener(
+"keypress",
+function(e){
+
+
+if(e.key==="Enter"){
+
+sendMessage();
+
+}
+
+
+});
+
+
+
+</script>
+
+
+
+</body>
+
+
+</html>

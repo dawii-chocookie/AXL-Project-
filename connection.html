@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AXL - Connexion / Inscription</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Lora&display=swap" rel="stylesheet">
+
+<style>
+body{
+    margin:0;
+    font-family:'Lora',serif;
+    background: #d9d9d9; /* gris pailleté léger */
+    background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 10px 10px;
+    color:#333;
+}
+
+.overlay{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.container{
+    background:#f5f5f5; /* fond clair moderne */
+    border-radius:15px;
+    padding:30px 40px;
+    max-width:700px;
+    width:100%;
+    box-shadow:0 4px 20px rgba(0,0,0,0.2);
+}
+
+h1{
+    text-align:center;
+    font-family:'Cinzel',serif;
+    margin-bottom:25px;
+    color:#222;
+}
+
+.choice-buttons{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+button{
+    padding:12px 25px;
+    margin:8px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+    background:#8b5e3c;
+    color:white;
+    transition:0.3s;
+}
+button:hover{
+    background:#a57c52;
+}
+
+form{
+    display:none;
+    margin-top:20px;
+}
+
+input, select{
+    width:100%;
+    padding:10px;
+    margin:6px 0;
+    border-radius:6px;
+    border:1px solid #ccc;
+    box-sizing:border-box;
+}
+
+.section-title{
+    margin-top:25px;
+    font-weight:bold;
+    font-size:18px;
+    border-bottom:1px solid #ccc;
+    padding-bottom:5px;
+    color:#555;
+}
+
+.checkbox-group{
+    margin-top:15px;
+}
+.checkbox-group label{
+    display:block;
+    margin:5px 0;
+    font-size:14px;
+}
+
+.link-option{
+    margin-top:10px;
+    text-decoration:underline;
+    cursor:pointer;
+    font-size:14px;
+    color:#555;
+}
+
+.message{
+    background:rgba(255,0,0,0.2);
+    padding:10px;
+    border-radius:6px;
+    margin-top:10px;
+    display:none;
+    color:#900;
+}
+</style>
+</head>
+
+<body>
+<div class="overlay">
+<div class="container">
+
+<h1>Bienvenue dans la Bibliothèque AXL 📚</h1>
+
+<div class="choice-buttons">
+    <p>Avez-vous déjà un compte ?</p>
+    <button onclick="showLogin()">Oui</button>
+    <button onclick="showRegister()">Non</button>
+</div>
+
+<!-- FORMULAIRE CONNEXION -->
+<form id="loginForm">
+    <div class="section-title">Connexion</div>
+
+    <input type="text" placeholder="Adresse e-mail ou ID (obligatoire)" required>
+    <input type="password" placeholder="Mot de passe (obligatoire)" required>
+
+    <div class="checkbox-group">
+        <label>
+            <input type="checkbox" id="remember-me"> Se souvenir de moi (optionnel)
+        </label>
+        <label>
+            <input type="checkbox" id="captcha-login" required> Je ne suis pas un robot (obligatoire)
+        </label>
+    </div>
+
+    <button type="button" onclick="checkAccount()">Se connecter</button>
+
+    <div class="message" id="accountMessage">
+        Un compte existe déjà avec ces informations. Voulez-vous vous connecter ou réinitialiser votre mot de passe ?
+        <div style="margin-top:10px;">
+            <button type="button">Connexion</button>
+            <button type="button">Mot de passe oublié</button>
+        </div>
+    </div>
+
+    <div class="link-option" onclick="showRegister()">Créer un nouveau compte</div>
+</form>
+
+<!-- FORMULAIRE INSCRIPTION -->
+<form id="registerForm">
+
+    <div class="section-title">Informations personnelles</div>
+
+    <input type="text" placeholder="Nom complet (obligatoire)" required>
+    <input type="date" placeholder="Date de naissance (obligatoire)" required>
+    
+    <select>
+        <option value="">Sexe (optionnel)</option>
+        <option>Masculin</option>
+        <option>Féminin</option>
+        <option>Autre</option>
+        <option>Préfère ne pas préciser</option>
+    </select>
+
+    <input type="text" placeholder="Adresse (optionnel)">
+    <input type="tel" placeholder="Numéro de téléphone (optionnel)">
+    <input type="email" placeholder="Adresse e-mail (obligatoire)" required>
+
+    <div class="section-title">Informations scolaires</div>
+
+    <select id="niveau" required>
+        <option value="">Niveau scolaire (obligatoire)</option>
+        <option>CP</option>
+        <option>CE1</option>
+        <option>CE2</option>
+        <option>CM1</option>
+        <option>CM2</option>
+        <option>6ème</option>
+        <option>5ème</option>
+        <option>4ème</option>
+        <option>3ème</option>
+        <option>Seconde</option>
+        <option>Première</option>
+        <option>Terminale</option>
+    </select>
+
+    <input type="text" placeholder="Établissement fréquenté (obligatoire)" required>
+    <input type="text" placeholder="Année académique (obligatoire)" required>
+
+    <div class="section-title">Informations parent / tuteur</div>
+
+    <input type="text" placeholder="Nom du parent/tuteur (obligatoire)" required>
+    
+    <select>
+        <option value="">Lien de parenté (obligatoire)</option>
+        <option>Père</option>
+        <option>Mère</option>
+        <option>Tuteur légal</option>
+        <option>Autre</option>
+    </select>
+
+    <input type="tel" placeholder="Téléphone du parent (optionnel)">
+    <input type="email" placeholder="E-mail du parent (optionnel)">
+
+    <div class="section-title">Sécurité et accès</div>
+
+    <input type="text" placeholder="Nom d’utilisateur (obligatoire)" required>
+    <input type="password" placeholder="Mot de passe (obligatoire)" required>
+    <input type="password" placeholder="Confirmer le mot de passe (obligatoire)" required>
+    <input type="text" placeholder="Question de sécurité (obligatoire)" required>
+    <input type="text" placeholder="Réponse (obligatoire)" required>
+
+    <div class="checkbox-group">
+        <label>
+            <input type="checkbox" id="accept-terms" required> J'accepte les conditions d'utilisation (obligatoire)
+        </label>
+        <label>
+            <input type="checkbox" id="captcha-register" required> Je ne suis pas un robot (obligatoire)
+        </label>
+        <label>
+            <input type="checkbox" id="email-notif"> Recevoir les notifications par e-mail (optionnel)
+        </label>
+    </div>
+
+    <button type="submit">Créer mon compte</button>
+</form>
+
+</div>
+</div>
+
+<script>
+function showLogin(){
+    document.getElementById("loginForm").style.display="block";
+    document.getElementById("registerForm").style.display="none";
+}
+function showRegister(){
+    document.getElementById("registerForm").style.display="block";
+    document.getElementById("loginForm").style.display="none";
+}
+
+// Création de compte → redirection vers "parametres.html" + stockage du niveau
+document.getElementById("registerForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    let niveau = document.getElementById("niveau").value;
+    if(!niveau){
+        alert("Veuillez sélectionner votre niveau scolaire !");
+        return;
+    }
+
+    // Stockage du niveau pour l'affichage des cours par niveau
+    localStorage.setItem("niveauScolaire", niveau);
+
+    alert("Compte créé avec succès ! Niveau enregistré : " + niveau);
+    window.location.href = "parametres.html"; // Redirection
+});
+
+// Vérification simple pour la connexion
+function checkAccount(){
+    document.getElementById("accountMessage").style.display="block";
+}
+</script>
+
+</body>
+</html>

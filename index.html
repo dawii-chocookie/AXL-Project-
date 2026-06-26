@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AXL - Assistant intelligent</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body class="light-mode">
+  <header class="navbar">
+    <a class="logo" href="index.html" aria-label="Accueil AXL">AXL</a>
+
+    <nav aria-label="Navigation principale">
+      <ul class="nav-links">
+        <li><a class="active" id="nav-home" href="index.html">Accueil</a></li>
+        <li><a id="nav-courses" href="cours.html">Cours</a></li>
+        <li><a id="nav-goals" href="objectifs.html">Objectifs</a></li>
+        <li><a id="nav-progress" href="progres.html">Progr&egrave;s</a></li>
+        <li><a id="nav-settings" href="parametres.html">Param&egrave;tres</a></li>
+      </ul>
+    </nav>
+
+    <div class="nav-actions">
+      <select id="languageSelect" aria-label="Choisir la langue">
+        <option value="fr">Fran&ccedil;ais</option>
+        <option value="en">English</option>
+        <option value="es">Espa&ntilde;ol</option>
+        <option value="ht">Krey&ograve;l</option>
+      </select>
+      <button class="icon-button" type="button" onclick="toggleDarkMode()" title="Changer le th&egrave;me" aria-label="Changer le th&egrave;me">
+        <i class="fas fa-moon"></i>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <p class="eyebrow" id="hero-eyebrow">Assistant d'apprentissage personnel</p>
+        <h1 id="main-title">Bienvenue sur AXL, ton assistant intelligent</h1>
+        <p id="slogan">R&eacute;vise autrement, organise tes objectifs et progresse avec un accompagnement simple et motivant.</p>
+
+        <div class="hero-actions">
+          <a class="primary-cta" id="start-btn" href="connection.html">
+            <span id="start-label">Commencer</span>
+            <i class="fas fa-arrow-right"></i>
+          </a>
+          <a class="secondary-cta" id="courses-cta" href="cours.html">Voir les cours</a>
+        </div>
+
+        <div class="hero-metrics" aria-label="Aper&ccedil;u de la progression">
+          <div>
+            <strong>75%</strong>
+            <span id="metric-goals">objectifs atteints</span>
+          </div>
+          <div>
+            <strong>5</strong>
+            <span id="metric-subjects">mati&egrave;res suivies</span>
+          </div>
+          <div>
+            <strong>12</strong>
+            <span id="metric-quizzes">quiz disponibles</span>
+          </div>
+        </div>
+      </div>
+
+      <aside class="assistant-panel" aria-label="Assistant AXL">
+        <div class="ai-message" id="aiMessage">Bonjour, je suis AXL. Pr&ecirc;t &agrave; r&eacute;viser ?</div>
+        <img src="ai-bot.png" id="aiBot" alt="Assistant virtuel AXL" />
+        <div class="mini-dashboard">
+          <div>
+            <span class="status-dot"></span>
+            <span id="dashboard-status">Session active</span>
+          </div>
+          <strong id="dashboard-focus">Alg&egrave;bre</strong>
+          <p id="dashboard-copy">Prochaine &eacute;tape : terminer un quiz de 10 minutes.</p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section-box features" aria-labelledby="features-title">
+      <div class="section-heading">
+        <p class="eyebrow" id="features-eyebrow">Fonctionnalit&eacute;s</p>
+        <h2 id="features-title">Tout pour avancer sans te disperser</h2>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature-card">
+          <i class="fas fa-pen-fancy icon"></i>
+          <h3 id="quiz-title">Quiz interactifs</h3>
+          <p id="quiz-desc">Teste tes connaissances avec des quiz adapt&eacute;s &agrave; ton niveau.</p>
+        </article>
+        <article class="feature-card">
+          <i class="fas fa-chart-line icon"></i>
+          <h3 id="progress-title">Suivi de progression</h3>
+          <p id="progress-desc">Suis tes progr&egrave;s et identifie rapidement tes forces.</p>
+        </article>
+        <article class="feature-card">
+          <i class="fas fa-sliders icon"></i>
+          <h3 id="custom-title">Personnalisation</h3>
+          <p id="custom-desc">Adapte l'interface et tes objectifs selon tes pr&eacute;f&eacute;rences.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="workspace-grid">
+      <article class="section-box progress-panel">
+        <div class="section-heading compact">
+          <p class="eyebrow" id="today-eyebrow">Aujourd'hui</p>
+          <h2 id="progression-title">Progression rapide</h2>
+        </div>
+        <div class="progress-card">
+          <canvas id="progress-chart" width="220" height="220" aria-label="Progression de 75 pourcent"></canvas>
+          <div>
+            <strong>75%</strong>
+            <p id="progression-copy">des objectifs atteints cette semaine</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="section-box advice">
+        <div class="section-heading compact">
+          <p class="eyebrow" id="advice-eyebrow">Conseil</p>
+          <h2 id="advice-title">Conseils d'&eacute;tude</h2>
+        </div>
+        <ul id="advice-list">
+          <li>Fais des pauses r&eacute;guli&egrave;res.</li>
+        </ul>
+        <button class="btn-secondary" id="advice-button" type="button" onclick="showAnotherAdvice()">Voir un autre conseil</button>
+      </article>
+
+      <article class="section-box motivation">
+        <div class="section-heading compact">
+          <p class="eyebrow" id="motivation-eyebrow">Motivation</p>
+          <h2 id="motivation-title">Phrase motivante du jour</h2>
+        </div>
+        <blockquote id="motivation-quote">Chaque jour est une nouvelle chance d'apprendre.</blockquote>
+        <button class="btn-secondary" id="quote-button" type="button" onclick="showAnotherQuote()">Voir une autre phrase</button>
+      </article>
+    </section>
+
+    <section class="section-box highlights">
+      <div class="section-heading">
+        <p class="eyebrow" id="activity-eyebrow">Activit&eacute;s</p>
+        <h2 id="activity-title">Reprends directement l&agrave; o&ugrave; tu t'es arr&ecirc;t&eacute;</h2>
+      </div>
+      <div class="highlight-grid">
+        <a class="highlight-card" href="cours-algebre.html">
+          <span><i class="fas fa-square-root-variable"></i></span>
+          <h3 id="math-title">Quiz de math&eacute;matiques</h3>
+          <p id="math-desc">Alg&egrave;bre, fonctions et exercices courts.</p>
+        </a>
+        <a class="highlight-card" href="cours-chimie.html">
+          <span><i class="fas fa-flask"></i></span>
+          <h3 id="science-title">Quiz de sciences</h3>
+          <p id="science-desc">Chimie et physique avec r&eacute;vision guid&eacute;e.</p>
+        </a>
+        <a class="highlight-card" href="objectifs.html">
+          <span><i class="fas fa-trophy"></i></span>
+          <h3 id="challenge-title">Challenge hebdomadaire</h3>
+          <p id="challenge-desc">Un objectif clair &agrave; terminer cette semaine.</p>
+        </a>
+      </div>
+    </section>
+
+    <section class="section-box badges">
+      <div class="section-heading">
+        <p class="eyebrow" id="badges-eyebrow">R&eacute;compenses</p>
+        <h2 id="badges-title">Badges &amp; progression</h2>
+      </div>
+      <div class="badge-row">
+        <div class="badge-card"><i class="fas fa-seedling"></i><span id="badge-beginner">D&eacute;butant</span></div>
+        <div class="badge-card"><i class="fas fa-star"></i><span id="badge-expert">Expert</span></div>
+        <div class="badge-card"><i class="fas fa-crown"></i><span id="badge-champion">Champion</span></div>
+      </div>
+    </section>
+  </main>
+
+  <div class="sidebar-box" aria-label="Acc&egrave;s rapides">
+    <a href="connexion.html" title="Connexion" aria-label="Connexion"><i class="fas fa-sign-in-alt"></i></a>
+    <a href="profil.html" title="Profil" aria-label="Profil"><i class="fas fa-user"></i></a>
+    <a href="aide.html" title="Aide" aria-label="Aide"><i class="fas fa-question-circle"></i></a>
+  </div>
+
+  <footer>
+    <p id="footer-copy">&copy; 2025 AXL. Tous droits r&eacute;serv&eacute;s.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AXL - Param&egrave;tres</title>
+  <link rel="stylesheet" href="style4.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script defer src="script4.js"></script>
+</head>
+<body class="light-mode">
+  <header class="app-header">
+    <nav class="navbar" aria-label="Navigation principale">
+      <a class="logo" href="index.html">AXL</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="cours.html">Cours</a></li>
+        <li><a href="objectifs.html">Objectifs</a></li>
+        <li><a href="progres.html">Progr&egrave;s</a></li>
+        <li><a class="active" href="parametres.html">Param&egrave;tres</a></li>
+      </ul>
+      <button id="theme-toggle" class="icon-button" type="button" title="Changer le theme" aria-label="Changer le theme">
+        <i id="theme-icon" class="fas fa-moon"></i>
+      </button>
+    </nav>
+  </header>
+
+  <main class="settings-page">
+    <section class="settings-hero">
+      <div>
+        <p class="eyebrow">Centre de controle</p>
+        <h1>Personnalise AXL selon ta facon d'apprendre.</h1>
+        <p>Gere ton profil, tes notifications, ton confort visuel, tes donnees et tes preferences d'etude au meme endroit.</p>
+      </div>
+      <aside class="profile-card" aria-label="Apercu du profil">
+        <div class="avatar-preview" id="avatarPreview">A</div>
+        <div>
+          <span>Profil actif</span>
+          <strong id="profileNamePreview">Apprenant AXL</strong>
+          <small id="profileMetaPreview">Eleve - Secondaire</small>
+        </div>
+      </aside>
+    </section>
+
+    <section class="settings-layout">
+      <aside class="settings-nav" aria-label="Sections des parametres">
+        <a href="#account"><i class="fas fa-user"></i> Compte</a>
+        <a href="#learning"><i class="fas fa-graduation-cap"></i> Apprentissage</a>
+        <a href="#notifications"><i class="fas fa-bell"></i> Notifications</a>
+        <a href="#appearance"><i class="fas fa-palette"></i> Apparence</a>
+        <a href="#accessibility"><i class="fas fa-universal-access"></i> Accessibilite</a>
+        <a href="#privacy"><i class="fas fa-shield-halved"></i> Confidentialite</a>
+        <a href="#data"><i class="fas fa-database"></i> Donnees</a>
+      </aside>
+
+      <div class="settings-panels">
+        <section id="account" class="settings-panel">
+          <div class="panel-header">
+            <div>
+              <p class="panel-kicker">Identite</p>
+              <h2>Compte</h2>
+            </div>
+            <i class="fas fa-user"></i>
+          </div>
+
+          <div class="form-grid">
+            <label>Nom complet
+              <input id="fullName" type="text" placeholder="Exemple : Alex Laurent" autocomplete="name" />
+            </label>
+            <label>Pseudo
+              <input id="username" type="text" placeholder="alex_axl" autocomplete="nickname" />
+            </label>
+            <label>Email
+              <input id="email" type="email" placeholder="email@example.com" autocomplete="email" />
+            </label>
+            <label>Type de compte
+              <select id="accountType">
+                <option value="Eleve">Eleve</option>
+                <option value="Professeur">Professeur</option>
+                <option value="Parent">Parent</option>
+              </select>
+            </label>
+          </div>
+        </section>
+
+        <section id="learning" class="settings-panel">
+          <div class="panel-header">
+            <div>
+              <p class="panel-kicker">Organisation</p>
+              <h2>Apprentissage</h2>
+            </div>
+            <i class="fas fa-graduation-cap"></i>
+          </div>
+
+          <div class="form-grid">
+            <label>Niveau
+              <select id="level">
+                <option value="Secondaire">Secondaire</option>
+                <option value="Lycee">Lycee</option>
+                <option value="Universite">Universite</option>
+                <option value="Autre">Autre</option>
+              </select>
+            </label>
+            <label>Objectif quotidien
+              <select id="dailyGoal">
+                <option value="15 min">15 min</option>
+                <option value="30 min">30 min</option>
+                <option value="45 min">45 min</option>
+                <option value="60 min">60 min</option>
+              </select>
+            </label>
+            <label>Debut des rappels
+              <input id="reminderTime" type="time" value="18:00" />
+            </label>
+            <label>Matiere prioritaire
+              <select id="mainSubject">
+                <option>Algebre</option>
+                <option>Grammaire</option>
+                <option>Histoire</option>
+                <option>Physique</option>
+                <option>Chimie</option>
+              </select>
+            </label>
+          </div>
+        </section>
+
+        <section id="notifications" class="settings-panel">
+          <div class="panel-header">
+            <div>
+              <p class="panel-kicker">Rappels</p>
+              <h2>Notifications</h2>
+            </div>
+            <i class="fas fa-bell"></i>
+          </div>
+
+          <div class="toggle-list">
+            <label><span><strong>Notifications generales</strong><small>Active les rappels importants.</small></span><input id="notifyGeneral" type="checkbox" /></label>
+            <label><span><strong>Objectifs du jour</strong><small>Rappel quand une tache reste ouverte.</small></span><input id="notifyGoals" type="checkbox" /></label>
+            <label><span><strong>Nouveaux cours</strong><small>Signale les contenus ajoutes.</small></span><input id="notifyCourses" type="checkbox" /></label>
+            <label><span><strong>Resume hebdomadaire</strong><small>Envoie un bilan de progression.</small></span><input id="notifyWeekly" type="checkbox" /></label>
+          </div>
+        </section>
+
+        <section id="appearance" class="settings-panel">
+          <div class="panel-header">
+            <div>
+              <p class="panel-kicker">Interface</p>
+              <h2>Apparence</h2>
+            </div>
+            <i class="fas fa-palette"></i>
+          </div>
+
+          <div class="segmented" role="group" aria-label="Theme">
+            <button type="button" data-theme-choice="light">Clair</button>
+            <button type="button" data-theme-choice="dark">Sombre</button>
+            <button type="button" data-theme-choice="system">Systeme</button>
+          </div>
+
+          <div class="form-grid compact">
+            <label>Taille du texte
+              <select id="textSize">
+                <option value="normal">Normale</option>
+                <option value="large">Grande</option>
+                <option value="xlarge">Tres grande</option>
+              </select>
+            </label>
+            <label>Densite
+              <select id="density">
+                <option value="comfortable">Confortable</option>
+                <option value="compact">Compacte</option>
+              </select>
+            </label>
+          </div>
+        </section>
+
+        <section id="accessibility" class="settings-panel">
+          <div class="panel-header">
+            <div>
+              <p class="panel-kicker">Confort</p>
+              <h2>Accessibilite</h2>
+            </div>
+            <i class="fas fa-universal-access"></i>
+          </div>
+
+          <div class="toggle-list">
+            <label><span><strong>Contraste renforce</strong><small>Ameliore la lisibilite des textes et bordures.</small></span><input id="highContrast" type="checkbox" /></label>
+            <label><span><strong>Reduire les animations</strong><small>Limite les transitions visuelles.</small></span><input id="reduceMotion" type="checkbox" /></label>
+            <label><span><strong>Mode concentration</strong><small>Masque les elements secondaires pendant l'etude.</small></span><input id="focusMode" type="checkbox" /></label>
+          </div>
+        </section>
+
+        <section id="privacy" class="settings-panel">
+          <div class="panel-header">
+            <div>
+              <p class="panel-kicker">Securite</p>
+              <h2>Confidentialite</h2>
+            </div>
+            <i class="fas fa-shield-halved"></i>
+          </div>
+
+          <div class="toggle-list">
+            <label><span><strong>Profil prive</strong><small>Cache les informations publiques du profil.</small></span><input id="privateProfile" type="checkbox" /></label>
+            <label><span><strong>Sauvegarde locale</strong><small>Conserve les preferences dans ce navigateur.</small></span><input id="localSave" type="checkbox" checked /></label>
+            <label><span><strong>Verrouillage au demarrage</strong><small>Demande une verification avant d'ouvrir le compte.</small></span><input id="startupLock" type="checkbox" /></label>
+          </div>
+        </section>
+
+        <section id="data" class="settings-panel danger-panel">
+          <div class="panel-header">
+            <div>
+              <p class="panel-kicker">Maintenance</p>
+              <h2>Donnees</h2>
+            </div>
+            <i class="fas fa-database"></i>
+          </div>
+
+          <div class="data-actions">
+            <button id="exportSettings" class="secondary-button" type="button"><i class="fas fa-download"></i> Exporter les parametres</button>
+            <button id="resetSettings" class="danger-button" type="button"><i class="fas fa-rotate-left"></i> Reinitialiser</button>
+          </div>
+          <p class="small-info">Les parametres sont sauvegardes dans le navigateur avec localStorage.</p>
+        </section>
+
+        <div class="sticky-save">
+          <span id="saveStatus">Aucune modification non enregistree.</span>
+          <button id="saveSettings" type="button"><i class="fas fa-check"></i> Enregistrer</button>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

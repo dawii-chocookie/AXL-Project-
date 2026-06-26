@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AXL - Mathematiques</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+
+    :root {
+      --primary: #F9A8D4;
+      --secondary: #F472B6;
+      --accent: #DB2777;
+      --accent-dark: #9D174D;
+      --background: #F8FAFC;
+      --text: #0F172A;
+      --muted: #64748B;
+      --card: #FFFFFF;
+      --line: rgba(15, 23, 42, 0.1);
+      --shadow: 0 18px 55px rgba(15, 23, 42, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(249, 168, 212, 0.3), transparent 30rem),
+        linear-gradient(180deg, #fff 0%, var(--background) 45%);
+      color: var(--text);
+      font-family: 'Inter', Arial, sans-serif;
+    }
+
+    body.dark-mode {
+      --background: #0F172A;
+      --text: #F8FAFC;
+      --muted: #CBD5E1;
+      --card: #1E293B;
+      --line: rgba(248, 250, 252, 0.12);
+      --shadow: 0 22px 60px rgba(0, 0, 0, 0.35);
+      background:
+        radial-gradient(circle at top left, rgba(219, 39, 119, 0.26), transparent 28rem),
+        linear-gradient(180deg, #111827 0%, #0F172A 55%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    select,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 16px clamp(20px, 5vw, 64px);
+      background: rgba(255, 255, 255, 0.78);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(16px);
+    }
+
+    body.dark-mode .navbar {
+      background: rgba(15, 23, 42, 0.82);
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: clamp(12px, 2vw, 24px);
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .nav-links a.active,
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .icon-button {
+      width: 42px;
+      min-height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: var(--card);
+      color: var(--text);
+    }
+
+    .math-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 380px);
+      gap: 24px;
+      align-items: center;
+      padding: clamp(32px, 6vw, 72px) clamp(20px, 5vw, 64px);
+      background:
+        linear-gradient(135deg, rgba(244, 114, 182, 0.95), rgba(249, 168, 212, 0.83)),
+        var(--secondary);
+      color: #28111d;
+    }
+
+    .eyebrow,
+    .panel-kicker {
+      margin-bottom: 10px;
+      color: var(--accent-dark);
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin-bottom: 18px;
+      font-size: clamp(2.4rem, 6vw, 4.4rem);
+      line-height: 0.98;
+    }
+
+    .math-hero p {
+      max-width: 650px;
+      color: rgba(40, 17, 29, 0.78);
+      font-size: 1.08rem;
+      line-height: 1.55;
+    }
+
+    .level-card {
+      padding: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.46);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.52);
+    }
+
+    .level-card strong {
+      display: block;
+      margin-bottom: 14px;
+      font-size: 1.3rem;
+    }
+
+    .level-card select {
+      width: 100%;
+      min-height: 44px;
+      padding: 0 12px;
+      border: 1px solid rgba(157, 23, 77, 0.22);
+      border-radius: 999px;
+      background: #fff;
+      color: #28111d;
+      font-weight: 800;
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 40px));
+      margin: 28px auto 52px;
+    }
+
+    .branch-tabs {
+      position: sticky;
+      top: 75px;
+      z-index: 10;
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 12px;
+      margin-bottom: 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.86);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+
+    body.dark-mode .branch-tabs {
+      background: rgba(30, 41, 59, 0.86);
+    }
+
+    .branch-tabs button {
+      flex: 0 0 auto;
+      min-height: 42px;
+      padding: 0 16px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--card);
+      color: var(--text);
+      font-weight: 800;
+    }
+
+    .branch-tabs button.active {
+      border-color: transparent;
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
+      color: #4a1830;
+    }
+
+    .course-grid {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .chapter-nav,
+    .branch-panel,
+    .chapter-card {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.88);
+      box-shadow: var(--shadow);
+    }
+
+    body.dark-mode .chapter-nav,
+    body.dark-mode .branch-panel,
+    body.dark-mode .chapter-card {
+      background: rgba(30, 41, 59, 0.88);
+    }
+
+    .chapter-nav {
+      position: sticky;
+      top: 156px;
+      padding: 16px;
+    }
+
+    .chapter-nav h2 {
+      margin-bottom: 12px;
+      font-size: 1rem;
+    }
+
+    .chapter-nav a {
+      display: block;
+      padding: 10px 12px;
+      border-radius: 12px;
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .chapter-nav a:hover {
+      background: var(--card);
+      color: var(--accent);
+    }
+
+    .branch-panel {
+      padding: 22px;
+    }
+
+    .branch-heading {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .branch-heading h2 {
+      font-size: 1.7rem;
+    }
+
+    .branch-heading i {
+      width: 44px;
+      height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: rgba(219, 39, 119, 0.1);
+      color: var(--accent);
+    }
+
+    .subbranch-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .subbranch-list span {
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(219, 39, 119, 0.08);
+      color: var(--accent-dark);
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    body.dark-mode .subbranch-list span {
+      color: var(--primary);
+    }
+
+    .chapter-stack {
+      display: grid;
+      gap: 16px;
+    }
+
+    .chapter-card {
+      padding: 18px;
+      box-shadow: none;
+    }
+
+    .chapter-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .chapter-card h3 {
+      margin-bottom: 8px;
+      font-size: 1.22rem;
+    }
+
+    .chapter-card p {
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .summary {
+      display: none;
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 14px;
+      background: var(--background);
+      color: var(--text);
+    }
+
+    .summary.open {
+      display: block;
+    }
+
+    .summary ul {
+      margin-left: 18px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .chapter-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .primary-btn,
+    .light-btn {
+      min-height: 40px;
+      border-radius: 999px;
+      padding: 0 14px;
+      font-weight: 800;
+    }
+
+    .primary-btn {
+      border: 0;
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
+      color: #4a1830;
+    }
+
+    .light-btn {
+      border: 1px solid var(--line);
+      background: var(--card);
+      color: var(--text);
+    }
+
+    .exercise-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .exercise-list li {
+      list-style: none;
+      padding: 12px;
+      border-radius: 12px;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .exercise-list strong {
+      color: var(--accent);
+    }
+
+    .empty {
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--card);
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 980px) {
+      .navbar,
+      .math-hero {
+        grid-template-columns: 1fr;
+        flex-wrap: wrap;
+      }
+
+      .nav-links {
+        order: 3;
+        width: 100%;
+        overflow-x: auto;
+      }
+
+      .course-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .chapter-nav {
+        position: static;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        width: calc(100% - 28px);
+      }
+
+      .chapter-top,
+      .branch-heading {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <a class="logo" href="index.html">AXL</a>
+    <nav aria-label="Navigation principale">
+      <ul class="nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a class="active" href="cours.html">Cours</a></li>
+        <li><a href="objectifs.html">Objectifs</a></li>
+        <li><a href="progres.html">Progr&egrave;s</a></li>
+        <li><a href="parametres.html">Param&egrave;tres</a></li>
+      </ul>
+    </nav>
+    <button class="icon-button" type="button" onclick="toggleDarkMode()" title="Changer le theme" aria-label="Changer le theme">
+      <i id="theme-icon" class="fas fa-moon"></i>
+    </button>
+  </header>
+
+  <section class="math-hero">
+    <div>
+      <p class="eyebrow">Mathematiques adaptees</p>
+      <h1 id="pageTitle">Cours de maths pour ton niveau.</h1>
+      <p id="pageIntro">Choisis ton niveau, puis travaille par branches: algebre, geometrie, problemes, fonctions, statistiques et calcul.</p>
+    </div>
+    <aside class="level-card">
+      <strong>Niveau de l'eleve</strong>
+      <select id="levelSelect" aria-label="Choisir le niveau">
+        <option value="ce1">CE1</option>
+        <option value="ce2">CE2</option>
+        <option value="cm1">CM1</option>
+        <option value="cm2">CM2</option>
+        <option value="6eme">6eme</option>
+        <option value="5eme">5eme</option>
+        <option value="4eme">4eme</option>
+        <option value="3eme">3eme</option>
+        <option value="seconde">Seconde</option>
+        <option value="premiere">Premiere</option>
+        <option value="terminale">Terminale</option>
+      </select>
+    </aside>
+  </section>
+
+  <main class="page">
+    <div class="branch-tabs" id="branchTabs" aria-label="Branches de mathematiques"></div>
+    <section class="course-grid">
+      <aside class="chapter-nav">
+        <h2>Chapitres</h2>
+        <div id="chapterNav"></div>
+      </aside>
+      <div id="courseContent"></div>
+    </section>
+  </main>
+
+  <script>
+    const levels = {
+      ce1: "CE1",
+      ce2: "CE2",
+      cm1: "CM1",
+      cm2: "CM2",
+      "6eme": "6eme",
+      "5eme": "5eme",
+      "4eme": "4eme",
+      "3eme": "3eme",
+      seconde: "Seconde",
+      premiere: "Premiere",
+      terminale: "Terminale"
+    };
+
+    const branchTemplates = {
+      primaire: [
+        {
+          key: "calcul",
+          title: "Calcul",
+          icon: "fa-calculator",
+          subbranches: ["Nombres", "Operations", "Calcul mental", "Fractions simples"],
+          chapters: [
+            chapter("Lire et composer les nombres", "Comprendre la valeur des chiffres selon leur position.", ["Decomposer 438 en centaines, dizaines, unites.", "Comparer 705 et 750.", "Ecrire en lettres: 1 204."], ["Un nombre se lit par classes.", "Chaque chiffre a une valeur selon sa position.", "Comparer commence par le chiffre le plus a gauche."]),
+            chapter("Additions et soustractions", "Poser les operations et verifier le resultat.", ["347 + 128 = ?", "900 - 456 = ?", "Trouve le nombre manquant: 65 + ? = 100."], ["Aligne les unites sous les unites.", "Les retenues se reportent dans la colonne suivante.", "Une soustraction peut se verifier par une addition."]),
+            chapter("Multiplications et divisions simples", "Utiliser les tables et partager en parts egales.", ["7 x 8 = ?", "36 / 4 = ?", "Un paquet contient 6 cartes. Combien pour 5 paquets ?"], ["Multiplier revient a repeter une addition.", "Diviser revient a partager.", "Les tables aident a calculer vite."])
+          ]
+        },
+        {
+          key: "geometrie",
+          title: "Geometrie",
+          icon: "fa-shapes",
+          subbranches: ["Figures planes", "Solides", "Angles", "Mesures"],
+          chapters: [
+            chapter("Figures usuelles", "Reconnaitre carre, rectangle, triangle et cercle.", ["Nomme une figure a 3 cotes.", "Combien de cotes a un rectangle ?", "Trace un carre de 4 cm de cote."], ["Une figure plane est dessinee sur une surface.", "Les polygones ont des cotes droits.", "Le cercle n'a pas de cote."]),
+            chapter("Perimetres", "Mesurer le contour d'une figure.", ["Perimetre d'un carre de cote 5 cm.", "Rectangle 6 cm par 3 cm: perimetre ?", "Quel outil sert a mesurer une longueur ?"], ["Le perimetre est la longueur du contour.", "On additionne toutes les longueurs.", "Les unites doivent etre les memes."]),
+            chapter("Solides", "Identifier cube, pave droit, cylindre et sphere.", ["Combien de faces a un cube ?", "Nomme un solide qui roule.", "Donne un objet en forme de pave droit."], ["Un solide occupe un volume.", "Le cube a 6 faces carrees.", "La sphere n'a pas de face plane."])
+          ]
+        },
+        {
+          key: "problemes",
+          title: "Problemes",
+          icon: "fa-lightbulb",
+          subbranches: ["Enonces", "Choix d'operation", "Donnees utiles", "Verification"],
+          chapters: [
+            chapter("Comprendre un enonce", "Repérer ce qu'on cherche et les informations utiles.", ["Souligne la question dans un probleme.", "Entoure les nombres utiles.", "Explique l'operation a choisir."], ["Lis l'enonce deux fois.", "La question indique ce qu'il faut trouver.", "Toutes les donnees ne sont pas toujours utiles."]),
+            chapter("Problemes additifs", "Resoudre les situations ou l'on ajoute ou retire.", ["Lea a 18 billes et en gagne 7. Total ?", "Paul a 40 cartes et en donne 12. Reste ?", "Il manque 9 pages pour finir un livre de 45 pages. Deja lues ?"], ["Ajouter quand une quantite augmente.", "Soustraire quand une quantite diminue.", "La phrase reponse est importante."]),
+            chapter("Problemes multiplicatifs", "Reconnaitre les groupes egaux.", ["4 sacs de 8 pommes: total ?", "24 biscuits partages entre 6 enfants.", "3 cahiers coutent 12 gourdes. Prix d'un cahier ?"], ["Multiplier pour plusieurs groupes identiques.", "Diviser pour partager.", "Verifie si le resultat est logique."])
+          ]
+        }
+      ],
+      college: [
+        {
+          key: "algebre",
+          title: "Algebre",
+          icon: "fa-square-root-variable",
+          subbranches: ["Expressions", "Equations", "Inequations", "Factorisation"],
+          chapters: [
+            chapter("Expressions litterales", "Utiliser des lettres pour representer des nombres.", ["Reduire 3x + 2x.", "Calculer 2a + 5 pour a = 4.", "Developper 3(x + 2)."], ["Une lettre peut representer un nombre inconnu.", "Reduire consiste a regrouper les termes semblables.", "Developper distribue un facteur sur une somme."]),
+            chapter("Equations du premier degre", "Trouver la valeur inconnue qui rend l'egalite vraie.", ["x + 7 = 15.", "3x = 21.", "2x - 5 = 9."], ["On garde l'egalite equilibree.", "On effectue la meme operation des deux cotes.", "La solution se verifie dans l'equation."]),
+            chapter("Inequations", "Comparer des expressions avec une inconnue.", ["x + 4 < 10.", "2x >= 12.", "Representer x < 5 sur une droite."], ["Une inequation utilise <, >, <= ou >=.", "Multiplier par un nombre negatif inverse le sens.", "La solution est souvent un ensemble de valeurs."]),
+            chapter("Factorisation", "Transformer une somme en produit.", ["Factoriser 3x + 6.", "Factoriser x² + 5x.", "Reconnaitre a² - b²."], ["On cherche un facteur commun.", "Factoriser aide a resoudre.", "Les identites remarquables accelerent les calculs."])
+          ]
+        },
+        {
+          key: "geometrie",
+          title: "Geometrie",
+          icon: "fa-draw-polygon",
+          subbranches: ["Triangles", "Theoreme de Pythagore", "Thales", "Angles"],
+          chapters: [
+            chapter("Triangles", "Utiliser les proprietes des triangles.", ["Somme des angles d'un triangle.", "Triangle isocele: que sait-on ?", "Construire un triangle de cotes 3, 4, 5."], ["La somme des angles vaut 180 degres.", "Un triangle isocele a deux cotes egaux.", "Les proprietes guident les demonstrations."]),
+            chapter("Pythagore", "Relier les longueurs dans un triangle rectangle.", ["Triangle rectangle: cotes 3 et 4, hypotenuse ?", "Verifier si 5, 12, 13 forme un triangle rectangle.", "Calculer un cote manquant avec a² + b² = c²."], ["Pythagore s'applique seulement au triangle rectangle.", "L'hypotenuse est le cote oppose a l'angle droit.", "La reciproque prouve qu'un triangle est rectangle."]),
+            chapter("Thales", "Utiliser les rapports de longueurs dans des droites paralleles.", ["Completer un tableau de proportionnalite.", "Calculer une longueur avec Thales.", "Identifier les droites paralleles utiles."], ["Thales relie des triangles semblables.", "Les rapports de longueurs sont egaux.", "Il faut justifier le parallelisme."])
+          ]
+        },
+        {
+          key: "fonctions",
+          title: "Fonctions",
+          icon: "fa-chart-line",
+          subbranches: ["Tableaux", "Graphiques", "Fonctions lineaires", "Fonctions affines"],
+          chapters: [
+            chapter("Notion de fonction", "Associer une entree a une sortie.", ["Si f(x)=2x+1, calculer f(3).", "Lire l'image de 4 dans un tableau.", "Trouver un antecedent simple."], ["Une fonction transforme un nombre en un autre.", "L'image est le resultat.", "Un antecedent est une valeur de depart."]),
+            chapter("Fonctions lineaires", "Etudier les fonctions de la forme f(x)=ax.", ["f(x)=3x, calculer f(5).", "Tracer f(x)=2x.", "Que vaut f(0) ?"], ["Une fonction lineaire traduit une proportionnalite.", "Sa courbe passe par l'origine.", "a est le coefficient directeur."]),
+            chapter("Fonctions affines", "Etudier les fonctions de la forme f(x)=ax+b.", ["f(x)=2x+3, calculer f(4).", "Lire l'ordonnee a l'origine.", "Tracer y=x-2."], ["La courbe est une droite.", "b est l'ordonnee a l'origine.", "a indique la pente."])
+          ]
+        },
+        {
+          key: "statistiques",
+          title: "Statistiques",
+          icon: "fa-chart-simple",
+          subbranches: ["Moyenne", "Mediane", "Frequences", "Probabilites"],
+          chapters: [
+            chapter("Moyenne et mediane", "Resumer une serie de donnees.", ["Moyenne de 8, 10, 12.", "Mediane de 3, 7, 9, 10, 12.", "Comparer moyenne et mediane."], ["La moyenne additionne puis divise.", "La mediane coupe la serie en deux.", "Il faut ordonner les donnees."]),
+            chapter("Frequences", "Exprimer une part d'un total.", ["5 eleves sur 20: frequence ?", "Convertir 0,25 en pourcentage.", "Trouver l'effectif total."], ["Frequence = effectif / total.", "Un pourcentage est une frequence sur 100.", "Les frequences aident a comparer."]),
+            chapter("Probabilites simples", "Mesurer la chance d'un evenement.", ["Probabilite d'obtenir pile.", "Tirer un as dans 52 cartes.", "Evenement impossible: probabilite ?"], ["Une probabilite est entre 0 et 1.", "Cas favorables / cas possibles.", "Un evenement certain vaut 1."])
+          ]
+        }
+      ],
+      lycee: [
+        {
+          key: "algebre",
+          title: "Algebre",
+          icon: "fa-square-root-variable",
+          subbranches: ["Second degre", "Systemes", "Inequations", "Suites"],
+          chapters: [
+            chapter("Equations du second degre", "Resoudre ax² + bx + c = 0.", ["Calculer le discriminant de x²-5x+6.", "Resoudre x²-9=0.", "Donner les racines de x²+2x+1."], ["Le discriminant determine le nombre de solutions.", "Delta = b² - 4ac.", "Factoriser peut aller plus vite."]),
+            chapter("Inequations du second degre", "Etudier le signe d'un trinome.", ["Signe de (x-2)(x+3).", "Resoudre x²-4 > 0.", "Faire un tableau de signes."], ["Les racines decoupent la droite.", "Le signe depend du coefficient dominant.", "Un tableau de signes evite les erreurs."]),
+            chapter("Suites numeriques", "Etudier des listes de nombres indexees.", ["Suite arithmetique u0=2, r=3: u5 ?", "Suite geometrique u0=4, q=2: u3 ?", "Identifier le type de suite."], ["Une suite arithmetique ajoute une raison.", "Une suite geometrique multiplie par un ratio.", "Les formules explicites calculent rapidement."]),
+            chapter("Systemes lineaires", "Resoudre plusieurs equations ensemble.", ["Resoudre x+y=7 et x-y=1.", "Utiliser substitution.", "Verifier une solution dans deux equations."], ["Une solution satisfait toutes les equations.", "Substitution isole une inconnue.", "Combinaison elimine une inconnue."])
+          ]
+        },
+        {
+          key: "fonctions",
+          title: "Fonctions",
+          icon: "fa-chart-line",
+          subbranches: ["Variations", "Derivees", "Polynomes", "Exponentielle"],
+          chapters: [
+            chapter("Variations de fonctions", "Lire et construire un tableau de variation.", ["Lire un maximum sur un tableau.", "Dire si f est croissante sur un intervalle.", "Comparer f(1) et f(3)."], ["Les variations indiquent comment f evolue.", "Un extremum est un maximum ou minimum.", "Un tableau resume les intervalles."]),
+            chapter("Derivee", "Utiliser la derivee pour etudier les variations.", ["Derivee de x².", "Derivee de 3x+5.", "Signe de f'(x) et variations."], ["La derivee mesure la pente.", "f' positive: f croissante.", "f' negative: f decroissante."]),
+            chapter("Fonctions polynomiales", "Manipuler les fonctions avec puissances de x.", ["Calculer f(2) pour f(x)=x²-3x+1.", "Trouver les zeros de x²-1.", "Identifier le degre."], ["Le degre est la plus grande puissance.", "Les zeros resolvent f(x)=0.", "La forme factorisee aide a lire les racines."])
+          ]
+        },
+        {
+          key: "geometrie",
+          title: "Geometrie",
+          icon: "fa-vector-square",
+          subbranches: ["Vecteurs", "Droites", "Produit scalaire", "Trigonometrie"],
+          chapters: [
+            chapter("Vecteurs", "Decrire un deplacement dans le plan.", ["Coordonnees de AB avec A(1,2), B(5,4).", "Additionner deux vecteurs.", "Verifier si deux vecteurs sont colineaires."], ["Un vecteur a une direction, un sens et une norme.", "Les coordonnees se calculent par difference.", "La colinearite indique le parallelisme."]),
+            chapter("Equations de droites", "Relier droite, pente et equation.", ["Droite passant par (0,1) de pente 2.", "Lire le coefficient directeur.", "Tester si un point appartient a une droite."], ["Une droite peut s'ecrire y=ax+b.", "a est la pente.", "Un point appartient si ses coordonnees verifient l'equation."]),
+            chapter("Trigonometrie", "Utiliser sinus, cosinus et tangente.", ["Dans un triangle rectangle, sin(30)=?", "Calculer un cote avec cosinus.", "Convertir 180 degres en radians."], ["Sinus, cosinus, tangente lient angles et longueurs.", "En lycee, on utilise aussi le cercle trigonometrique.", "Les radians deviennent essentiels."])
+          ]
+        },
+        {
+          key: "probabilites",
+          title: "Probabilites",
+          icon: "fa-dice",
+          subbranches: ["Denombrement", "Arbres", "Variables aleatoires", "Lois"],
+          chapters: [
+            chapter("Probabilites conditionnelles", "Calculer une probabilite sachant une information.", ["Lire P(A sachant B).", "Utiliser un arbre pondere.", "Verifier une independance."], ["Une condition reduit l'univers.", "Les arbres organisent les calculs.", "Independance: P(A sachant B)=P(A)."]),
+            chapter("Variables aleatoires", "Associer un gain ou une valeur a une experience.", ["Construire une loi de probabilite.", "Calculer une esperance.", "Interpréter un gain moyen."], ["Une variable aleatoire prend plusieurs valeurs.", "La loi donne les probabilites.", "L'esperance est une moyenne ponderee."]),
+            chapter("Denombrement", "Compter les cas possibles sans les lister un par un.", ["Nombre de codes a 3 chiffres.", "Arrangements simples.", "Choisir 2 eleves parmi 10."], ["Multiplier les choix successifs.", "L'ordre compte dans un arrangement.", "L'ordre ne compte pas dans une combinaison."])
+          ]
+        }
+      ]
+    };
+
+    function chapter(title, goal, exercises, summary) {
+      return { title, goal, exercises, summary };
+    }
+
+    function profileForLevel(level) {
+      if (["ce1", "ce2", "cm1", "cm2"].includes(level)) return "primaire";
+      if (["6eme", "5eme", "4eme", "3eme"].includes(level)) return "college";
+      return "lycee";
+    }
+
+    function getInitialLevel() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("level") || localStorage.getItem("studentLevel") || "6eme";
+    }
+
+    let currentLevel = getInitialLevel();
+    let activeBranch = null;
+
+    function slug(value) {
+      return value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+    }
+
+    function getBranches() {
+      return branchTemplates[profileForLevel(currentLevel)];
+    }
+
+    function render() {
+      const branches = getBranches();
+      activeBranch = activeBranch && branches.some((branch) => branch.key === activeBranch)
+        ? activeBranch
+        : branches[0].key;
+
+      document.getElementById("levelSelect").value = currentLevel;
+      document.getElementById("pageTitle").textContent = `Cours de maths - Niveau ${levels[currentLevel]}`;
+      document.getElementById("pageIntro").textContent = `Parcours adapte au niveau ${levels[currentLevel]} avec branches, sous-branches, resumes et exercices.`;
+      renderBranchTabs(branches);
+      renderBranch(branches.find((branch) => branch.key === activeBranch));
+    }
+
+    function renderBranchTabs(branches) {
+      const tabs = document.getElementById("branchTabs");
+      tabs.innerHTML = "";
+
+      branches.forEach((branch) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = branch.key === activeBranch ? "active" : "";
+        button.innerHTML = `<i class="fas ${branch.icon}"></i> ${branch.title}`;
+        button.addEventListener("click", () => {
+          activeBranch = branch.key;
+          render();
+        });
+        tabs.appendChild(button);
+      });
+    }
+
+    function renderBranch(branch) {
+      const nav = document.getElementById("chapterNav");
+      const content = document.getElementById("courseContent");
+      nav.innerHTML = "";
+
+      if (!branch) {
+        content.innerHTML = `<div class="empty">Aucun contenu disponible pour ce niveau.</div>`;
+        return;
+      }
+
+      branch.chapters.forEach((chapterItem, index) => {
+        const id = `${branch.key}-${slug(chapterItem.title)}`;
+        const link = document.createElement("a");
+        link.href = `#${id}`;
+        link.textContent = `${index + 1}. ${chapterItem.title}`;
+        nav.appendChild(link);
+      });
+
+      content.innerHTML = `
+        <article class="branch-panel">
+          <div class="branch-heading">
+            <div>
+              <p class="panel-kicker">Branche</p>
+              <h2>${branch.title}</h2>
+            </div>
+            <i class="fas ${branch.icon}"></i>
+          </div>
+          <div class="subbranch-list">
+            ${branch.subbranches.map((item) => `<span>${item}</span>`).join("")}
+          </div>
+          <div class="chapter-stack">
+            ${branch.chapters.map((chapterItem, index) => renderChapter(branch, chapterItem, index)).join("")}
+          </div>
+        </article>
+      `;
+    }
+
+    function renderChapter(branch, chapterItem, index) {
+      const id = `${branch.key}-${slug(chapterItem.title)}`;
+      const summaryId = `${id}-summary`;
+      return `
+        <section class="chapter-card" id="${id}">
+          <div class="chapter-top">
+            <div>
+              <p class="panel-kicker">Chapitre ${index + 1}</p>
+              <h3>${chapterItem.title}</h3>
+              <p>${chapterItem.goal}</p>
+            </div>
+            <button class="primary-btn" type="button" onclick="toggleSummary('${summaryId}')">Resume du cours</button>
+          </div>
+          <div class="summary" id="${summaryId}">
+            <ul>
+              ${chapterItem.summary.map((item) => `<li>${item}</li>`).join("")}
+            </ul>
+          </div>
+          <div class="chapter-actions">
+            <button class="light-btn" type="button" onclick="toggleExercises('${id}-exercises')">Voir 3 exercices</button>
+          </div>
+          <ol class="exercise-list summary" id="${id}-exercises">
+            ${chapterItem.exercises.map((exercise, exerciseIndex) => `<li><strong>Exercice ${exerciseIndex + 1}.</strong> ${exercise}</li>`).join("")}
+          </ol>
+        </section>
+      `;
+    }
+
+    function toggleSummary(id) {
+      document.getElementById(id)?.classList.toggle("open");
+    }
+
+    function toggleExercises(id) {
+      document.getElementById(id)?.classList.toggle("open");
+    }
+
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+      const isDark = document.body.classList.contains("dark-mode");
+      document.getElementById("theme-icon").className = isDark ? "fas fa-sun" : "fas fa-moon";
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "dark") {
+        document.body.classList.add("dark-mode");
+        document.getElementById("theme-icon").className = "fas fa-sun";
+      }
+
+      document.getElementById("levelSelect").addEventListener("change", (event) => {
+        currentLevel = event.target.value;
+        localStorage.setItem("studentLevel", currentLevel);
+        activeBranch = null;
+        const url = new URL(window.location.href);
+        url.searchParams.set("level", currentLevel);
+        window.history.replaceState({}, "", url);
+        render();
+      });
+
+      localStorage.setItem("studentLevel", currentLevel);
+      render();
+    });
+  </script>
+</body>
+</html>

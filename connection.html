@@ -1,272 +1,661 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AXL - Connexion / Inscription</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Lora&display=swap" rel="stylesheet">
-
-<style>
-body{
-    margin:0;
-    font-family:'Lora',serif;
-    background: #d9d9d9; /* gris pailleté léger */
-    background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
-    background-size: 10px 10px;
-    color:#333;
-}
-
-.overlay{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:20px;
-}
-
-.container{
-    background:#f5f5f5; /* fond clair moderne */
-    border-radius:15px;
-    padding:30px 40px;
-    max-width:700px;
-    width:100%;
-    box-shadow:0 4px 20px rgba(0,0,0,0.2);
-}
-
-h1{
-    text-align:center;
-    font-family:'Cinzel',serif;
-    margin-bottom:25px;
-    color:#222;
-}
-
-.choice-buttons{
-    text-align:center;
-    margin-bottom:25px;
-}
-
-button{
-    padding:12px 25px;
-    margin:8px;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:bold;
-    background:#8b5e3c;
-    color:white;
-    transition:0.3s;
-}
-button:hover{
-    background:#a57c52;
-}
-
-form{
-    display:none;
-    margin-top:20px;
-}
-
-input, select{
-    width:100%;
-    padding:10px;
-    margin:6px 0;
-    border-radius:6px;
-    border:1px solid #ccc;
-    box-sizing:border-box;
-}
-
-.section-title{
-    margin-top:25px;
-    font-weight:bold;
-    font-size:18px;
-    border-bottom:1px solid #ccc;
-    padding-bottom:5px;
-    color:#555;
-}
-
-.checkbox-group{
-    margin-top:15px;
-}
-.checkbox-group label{
-    display:block;
-    margin:5px 0;
-    font-size:14px;
-}
-
-.link-option{
-    margin-top:10px;
-    text-decoration:underline;
-    cursor:pointer;
-    font-size:14px;
-    color:#555;
-}
-
-.message{
-    background:rgba(255,0,0,0.2);
-    padding:10px;
-    border-radius:6px;
-    margin-top:10px;
-    display:none;
-    color:#900;
-}
-</style>
-</head>
-
-<body>
-<div class="overlay">
-<div class="container">
-
-<h1>Bienvenue dans la Bibliothèque AXL 📚</h1>
-
-<div class="choice-buttons">
-    <p>Avez-vous déjà un compte ?</p>
-    <button onclick="showLogin()">Oui</button>
-    <button onclick="showRegister()">Non</button>
-</div>
-
-<!-- FORMULAIRE CONNEXION -->
-<form id="loginForm">
-    <div class="section-title">Connexion</div>
-
-    <input type="text" placeholder="Adresse e-mail ou ID (obligatoire)" required>
-    <input type="password" placeholder="Mot de passe (obligatoire)" required>
-
-    <div class="checkbox-group">
-        <label>
-            <input type="checkbox" id="remember-me"> Se souvenir de moi (optionnel)
-        </label>
-        <label>
-            <input type="checkbox" id="captcha-login" required> Je ne suis pas un robot (obligatoire)
-        </label>
-    </div>
-
-    <button type="button" onclick="checkAccount()">Se connecter</button>
-
-    <div class="message" id="accountMessage">
-        Un compte existe déjà avec ces informations. Voulez-vous vous connecter ou réinitialiser votre mot de passe ?
-        <div style="margin-top:10px;">
-            <button type="button">Connexion</button>
-            <button type="button">Mot de passe oublié</button>
-        </div>
-    </div>
-
-    <div class="link-option" onclick="showRegister()">Créer un nouveau compte</div>
-</form>
-
-<!-- FORMULAIRE INSCRIPTION -->
-<form id="registerForm">
-
-    <div class="section-title">Informations personnelles</div>
-
-    <input type="text" placeholder="Nom complet (obligatoire)" required>
-    <input type="date" placeholder="Date de naissance (obligatoire)" required>
-    
-    <select>
-        <option value="">Sexe (optionnel)</option>
-        <option>Masculin</option>
-        <option>Féminin</option>
-        <option>Autre</option>
-        <option>Préfère ne pas préciser</option>
-    </select>
-
-    <input type="text" placeholder="Adresse (optionnel)">
-    <input type="tel" placeholder="Numéro de téléphone (optionnel)">
-    <input type="email" placeholder="Adresse e-mail (obligatoire)" required>
-
-    <div class="section-title">Informations scolaires</div>
-
-    <select id="niveau" required>
-        <option value="">Niveau scolaire (obligatoire)</option>
-        <option>CP</option>
-        <option>CE1</option>
-        <option>CE2</option>
-        <option>CM1</option>
-        <option>CM2</option>
-        <option>6ème</option>
-        <option>5ème</option>
-        <option>4ème</option>
-        <option>3ème</option>
-        <option>Seconde</option>
-        <option>Première</option>
-        <option>Terminale</option>
-    </select>
-
-    <input type="text" placeholder="Établissement fréquenté (obligatoire)" required>
-    <input type="text" placeholder="Année académique (obligatoire)" required>
-
-    <div class="section-title">Informations parent / tuteur</div>
-
-    <input type="text" placeholder="Nom du parent/tuteur (obligatoire)" required>
-    
-    <select>
-        <option value="">Lien de parenté (obligatoire)</option>
-        <option>Père</option>
-        <option>Mère</option>
-        <option>Tuteur légal</option>
-        <option>Autre</option>
-    </select>
-
-    <input type="tel" placeholder="Téléphone du parent (optionnel)">
-    <input type="email" placeholder="E-mail du parent (optionnel)">
-
-    <div class="section-title">Sécurité et accès</div>
-
-    <input type="text" placeholder="Nom d’utilisateur (obligatoire)" required>
-    <input type="password" placeholder="Mot de passe (obligatoire)" required>
-    <input type="password" placeholder="Confirmer le mot de passe (obligatoire)" required>
-    <input type="text" placeholder="Question de sécurité (obligatoire)" required>
-    <input type="text" placeholder="Réponse (obligatoire)" required>
-
-    <div class="checkbox-group">
-        <label>
-            <input type="checkbox" id="accept-terms" required> J'accepte les conditions d'utilisation (obligatoire)
-        </label>
-        <label>
-            <input type="checkbox" id="captcha-register" required> Je ne suis pas un robot (obligatoire)
-        </label>
-        <label>
-            <input type="checkbox" id="email-notif"> Recevoir les notifications par e-mail (optionnel)
-        </label>
-    </div>
-
-    <button type="submit">Créer mon compte</button>
-</form>
-
-</div>
-</div>
-
-<script>
-function showLogin(){
-    document.getElementById("loginForm").style.display="block";
-    document.getElementById("registerForm").style.display="none";
-}
-function showRegister(){
-    document.getElementById("registerForm").style.display="block";
-    document.getElementById("loginForm").style.display="none";
-}
-
-// Création de compte → redirection vers "parametres.html" + stockage du niveau
-document.getElementById("registerForm").addEventListener("submit", function(e){
-    e.preventDefault();
-
-    let niveau = document.getElementById("niveau").value;
-    if(!niveau){
-        alert("Veuillez sélectionner votre niveau scolaire !");
-        return;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AXL - Connexion / Inscription</title>
+  
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Lora&display=swap" rel="stylesheet" />
+  
+  <style>
+    /* Styles spécifiques à la page de connexion */
+    body.connection-page {
+      background: linear-gradient(135deg, rgba(244, 114, 182, 0.94), rgba(249, 168, 212, 0.82)), var(--secondary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
-    // Stockage du niveau pour l'affichage des cours par niveau
-    localStorage.setItem("niveauScolaire", niveau);
+    body.connection-page .navbar {
+      background: rgba(255, 255, 255, 0.95);
+    }
 
-    alert("Compte créé avec succès ! Niveau enregistré : " + niveau);
-    window.location.href = "parametres.html"; // Redirection
-});
+    body.connection-page.dark-mode .navbar {
+      background: rgba(15, 23, 42, 0.95);
+    }
 
-// Vérification simple pour la connexion
-function checkAccount(){
-    document.getElementById("accountMessage").style.display="block";
-}
-</script>
+    .connection-overlay {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+      min-height: calc(100vh - 74px);
+    }
 
+    .connection-container {
+      background: var(--card);
+      border-radius: 24px;
+      padding: 40px;
+      max-width: 700px;
+      width: 100%;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--line);
+    }
+
+    .connection-container h1 {
+      text-align: center;
+      font-family: 'Cinzel', serif;
+      margin-bottom: 30px;
+      color: var(--text);
+      font-size: 32px;
+    }
+
+    .choice-buttons {
+      text-align: center;
+      margin-bottom: 30px;
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .choice-buttons p {
+      width: 100%;
+      color: var(--muted);
+      margin-bottom: 15px;
+    }
+
+    .choice-buttons button {
+      padding: 12px 28px;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--secondary), var(--accent));
+      color: white;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 12px 26px rgba(219, 39, 119, 0.18);
+    }
+
+    .choice-buttons button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 35px rgba(219, 39, 119, 0.25);
+    }
+
+    .choice-buttons button.active {
+      background: var(--accent);
+      box-shadow: 0 18px 45px rgba(157, 23, 77, 0.28);
+    }
+
+    form {
+      display: none;
+      margin-top: 20px;
+      animation: fadeIn 0.3s ease;
+    }
+
+    form.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .section-title {
+      margin-top: 25px;
+      margin-bottom: 15px;
+      font-weight: 800;
+      font-size: 16px;
+      border-bottom: 2px solid var(--line);
+      padding-bottom: 10px;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    form:first-of-type .section-title {
+      margin-top: 0;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px 16px;
+      margin: 10px 0;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      color: var(--text);
+      box-sizing: border-box;
+      font-family: inherit;
+      font-size: 14px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(219, 39, 119, 0.1);
+    }
+
+    input::placeholder {
+      color: var(--muted);
+    }
+
+    .checkbox-group {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    .checkbox-group label {
+      display: flex;
+      align-items: center;
+      margin: 12px 0;
+      font-size: 14px;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+      width: auto;
+      margin: 0 10px 0 0;
+      cursor: pointer;
+      accent-color: var(--accent);
+    }
+
+    .link-option {
+      margin-top: 16px;
+      text-decoration: underline;
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--accent);
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+
+    .link-option:hover {
+      color: var(--accent-dark);
+    }
+
+    .message {
+      background: rgba(219, 39, 119, 0.1);
+      padding: 16px;
+      border-radius: 12px;
+      margin-top: 16px;
+      display: none;
+      color: var(--accent);
+      border: 1px solid rgba(219, 39, 119, 0.2);
+    }
+
+    .message.show {
+      display: block;
+    }
+
+    .message.error {
+      background: rgba(239, 68, 68, 0.1);
+      color: #dc2626;
+      border-color: rgba(239, 68, 68, 0.2);
+    }
+
+    button[type="submit"], button[type="button"].form-submit {
+      width: 100%;
+      padding: 14px;
+      margin-top: 16px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--secondary), var(--accent));
+      color: white;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 12px 26px rgba(219, 39, 119, 0.18);
+      font-size: 15px;
+    }
+
+    button[type="submit"]:hover, button[type="button"].form-submit:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 35px rgba(219, 39, 119, 0.25);
+    }
+
+    button[type="submit"]:active, button[type="button"].form-submit:active {
+      transform: translateY(-1px);
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .connection-container {
+        padding: 24px;
+      }
+
+      .connection-container h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+
+      .choice-buttons {
+        flex-direction: column;
+      }
+
+      .choice-buttons button {
+        width: 100%;
+      }
+
+      .connection-overlay {
+        padding: 20px 16px;
+      }
+    }
+  </style>
+</head>
+
+<body class="light-mode connection-page">
+  <!-- Navbar -->
+  <header class="navbar">
+    <a class="logo" href="index.html" aria-label="Accueil AXL">AXL</a>
+
+    <nav aria-label="Navigation principale">
+      <ul class="nav-links">
+        <li><a id="nav-home" href="index.html">Accueil</a></li>
+        <li><a id="nav-courses" href="cours.html">Cours</a></li>
+        <li><a id="nav-goals" href="objectifs.html">Objectifs</a></li>
+        <li><a id="nav-progress" href="progres.html">Progrès</a></li>
+        <li><a id="nav-settings" href="parametres.html">Paramètres</a></li>
+      </ul>
+    </nav>
+
+    <div class="nav-actions">
+      <select id="languageSelect" aria-label="Choisir la langue">
+        <option value="fr">Français</option>
+        <option value="en">English</option>
+        <option value="es">Español</option>
+        <option value="ht">Kreyòl</option>
+      </select>
+      <button class="icon-button" type="button" onclick="toggleDarkMode()" title="Changer le thème" aria-label="Changer le thème">
+        <i class="fas fa-moon"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Contenu principal -->
+  <div class="connection-overlay">
+    <div class="connection-container">
+      <h1 id="page-title">Bienvenue 📚</h1>
+
+      <!-- Boutons de choix -->
+      <div class="choice-buttons">
+        <p id="choice-prompt">Avez-vous déjà un compte ?</p>
+        <button class="active" type="button" onclick="showLogin()" id="btn-login">Oui</button>
+        <button type="button" onclick="showRegister()" id="btn-register">Non</button>
+      </div>
+
+      <!-- FORMULAIRE CONNEXION -->
+      <form id="loginForm" class="active">
+        <div class="section-title" id="login-title">Connexion</div>
+
+        <input type="text" id="login-email" placeholder="Adresse e-mail ou ID (obligatoire)" required />
+        <input type="password" id="login-password" placeholder="Mot de passe (obligatoire)" required />
+
+        <div class="checkbox-group">
+          <label>
+            <input type="checkbox" id="remember-me" />
+            <span id="remember-me-label">Se souvenir de moi (optionnel)</span>
+          </label>
+          <label>
+            <input type="checkbox" id="captcha-login" required />
+            <span id="captcha-label">Je ne suis pas un robot (obligatoire)</span>
+          </label>
+        </div>
+
+        <button type="button" class="form-submit" onclick="handleLogin()">
+          <span id="login-button">Se connecter</span>
+          <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
+        </button>
+
+        <div class="message" id="loginMessage"></div>
+
+        <p class="link-option" onclick="showRegister()" id="create-account-link">Créer un nouveau compte</p>
+        <p class="link-option" id="forgot-password-link">Mot de passe oublié ?</p>
+      </form>
+
+      <!-- FORMULAIRE INSCRIPTION -->
+      <form id="registerForm">
+        <!-- Informations personnelles -->
+        <div class="section-title" id="personal-info-title">Informations personnelles</div>
+
+        <input type="text" id="register-fullname" placeholder="Nom complet (obligatoire)" required />
+        <input type="date" id="register-birthdate" placeholder="Date de naissance (obligatoire)" required />
+
+        <select id="register-gender">
+          <option value="">Sexe (optionnel)</option>
+          <option value="m">Masculin</option>
+          <option value="f">Féminin</option>
+          <option value="o">Autre</option>
+          <option value="n">Préfère ne pas préciser</option>
+        </select>
+
+        <input type="text" id="register-address" placeholder="Adresse (optionnel)" />
+        <input type="tel" id="register-phone" placeholder="Numéro de téléphone (optionnel)" />
+        <input type="email" id="register-email" placeholder="Adresse e-mail (obligatoire)" required />
+
+        <!-- Informations scolaires -->
+        <div class="section-title" id="school-info-title">Informations scolaires</div>
+
+        <select id="register-level" required>
+          <option value="">Niveau scolaire (obligatoire)</option>
+          <option value="cp">CP</option>
+          <option value="ce1">CE1</option>
+          <option value="ce2">CE2</option>
+          <option value="cm1">CM1</option>
+          <option value="cm2">CM2</option>
+          <option value="6">6ème</option>
+          <option value="5">5ème</option>
+          <option value="4">4ème</option>
+          <option value="3">3ème</option>
+          <option value="2nd">Seconde</option>
+          <option value="1ere">Première</option>
+          <option value="term">Terminale</option>
+        </select>
+
+        <input type="text" id="register-school" placeholder="Établissement fréquenté (obligatoire)" required />
+        <input type="text" id="register-year" placeholder="Année académique (obligatoire)" required />
+
+        <!-- Informations parent / tuteur -->
+        <div class="section-title" id="parent-info-title">Informations parent / tuteur</div>
+
+        <input type="text" id="register-parent-name" placeholder="Nom du parent/tuteur (obligatoire)" required />
+
+        <select id="register-parent-relation" required>
+          <option value="">Lien de parenté (obligatoire)</option>
+          <option value="father">Père</option>
+          <option value="mother">Mère</option>
+          <option value="legal">Tuteur légal</option>
+          <option value="other">Autre</option>
+        </select>
+
+        <input type="tel" id="register-parent-phone" placeholder="Téléphone du parent (optionnel)" />
+        <input type="email" id="register-parent-email" placeholder="E-mail du parent (optionnel)" />
+
+        <!-- Sécurité et accès -->
+        <div class="section-title" id="security-info-title">Sécurité et accès</div>
+
+        <input type="text" id="register-username" placeholder="Nom d'utilisateur (obligatoire)" required />
+        <input type="password" id="register-password" placeholder="Mot de passe (obligatoire)" required />
+        <input type="password" id="register-password-confirm" placeholder="Confirmer le mot de passe (obligatoire)" required />
+        <input type="text" id="register-security-question" placeholder="Question de sécurité (obligatoire)" required />
+        <input type="text" id="register-security-answer" placeholder="Réponse (obligatoire)" required />
+
+        <div class="checkbox-group">
+          <label>
+            <input type="checkbox" id="accept-terms" required />
+            <span id="accept-terms-label">J'accepte les conditions d'utilisation (obligatoire)</span>
+          </label>
+          <label>
+            <input type="checkbox" id="captcha-register" required />
+            <span id="captcha-register-label">Je ne suis pas un robot (obligatoire)</span>
+          </label>
+          <label>
+            <input type="checkbox" id="email-notif" />
+            <span id="email-notif-label">Recevoir les notifications par e-mail (optionnel)</span>
+          </label>
+        </div>
+
+        <button type="submit" id="register-button">Créer mon compte</button>
+
+        <div class="message" id="registerMessage"></div>
+
+        <p class="link-option" onclick="showLogin()" id="have-account-link">J'ai déjà un compte</p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p id="footer-copy">&copy; 2025 AXL. Tous droits réservés.</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+  <script>
+    // Traductions pour la page de connexion
+    const connectionTranslations = {
+      fr: {
+        pageTitle: "Bienvenue 📚",
+        choicePrompt: "Avez-vous déjà un compte ?",
+        loginTitle: "Connexion",
+        loginEmailPlaceholder: "Adresse e-mail ou ID (obligatoire)",
+        loginPasswordPlaceholder: "Mot de passe (obligatoire)",
+        rememberMeLabel: "Se souvenir de moi (optionnel)",
+        captchaLabel: "Je ne suis pas un robot (obligatoire)",
+        loginButton: "Se connecter",
+        createAccountLink: "Créer un nouveau compte",
+        forgotPasswordLink: "Mot de passe oublié ?",
+        personalInfoTitle: "Informations personnelles",
+        schoolInfoTitle: "Informations scolaires",
+        parentInfoTitle: "Informations parent / tuteur",
+        securityInfoTitle: "Sécurité et accès",
+        acceptTermsLabel: "J'accepte les conditions d'utilisation (obligatoire)",
+        captchaRegisterLabel: "Je ne suis pas un robot (obligatoire)",
+        emailNotifLabel: "Recevoir les notifications par e-mail (optionnel)",
+        registerButton: "Créer mon compte",
+        haveAccountLink: "J'ai déjà un compte",
+        successMessage: "Compte créé avec succès ! Bienvenue sur AXL.",
+        errorMessage: "Une erreur s'est produite. Veuillez vérifier vos informations.",
+        footerCopy: "© 2025 AXL. Tous droits réservés."
+      },
+      en: {
+        pageTitle: "Welcome 📚",
+        choicePrompt: "Do you already have an account?",
+        loginTitle: "Login",
+        loginEmailPlaceholder: "Email or ID (required)",
+        loginPasswordPlaceholder: "Password (required)",
+        rememberMeLabel: "Remember me (optional)",
+        captchaLabel: "I am not a robot (required)",
+        loginButton: "Sign in",
+        createAccountLink: "Create a new account",
+        forgotPasswordLink: "Forgot password?",
+        personalInfoTitle: "Personal Information",
+        schoolInfoTitle: "School Information",
+        parentInfoTitle: "Parent / Guardian Information",
+        securityInfoTitle: "Security and Access",
+        acceptTermsLabel: "I accept the terms of use (required)",
+        captchaRegisterLabel: "I am not a robot (required)",
+        emailNotifLabel: "Receive email notifications (optional)",
+        registerButton: "Create my account",
+        haveAccountLink: "I already have an account",
+        successMessage: "Account created successfully! Welcome to AXL.",
+        errorMessage: "An error occurred. Please check your information.",
+        footerCopy: "© 2025 AXL. All rights reserved."
+      },
+      es: {
+        pageTitle: "Bienvenido 📚",
+        choicePrompt: "¿Ya tienes una cuenta?",
+        loginTitle: "Iniciar sesión",
+        loginEmailPlaceholder: "Correo electrónico o ID (obligatorio)",
+        loginPasswordPlaceholder: "Contraseña (obligatorio)",
+        rememberMeLabel: "Recuérdame (opcional)",
+        captchaLabel: "No soy un robot (obligatorio)",
+        loginButton: "Conectar",
+        createAccountLink: "Crear una nueva cuenta",
+        forgotPasswordLink: "¿Olvidaste tu contraseña?",
+        personalInfoTitle: "Información Personal",
+        schoolInfoTitle: "Información Escolar",
+        parentInfoTitle: "Información del Padre / Tutor",
+        securityInfoTitle: "Seguridad y Acceso",
+        acceptTermsLabel: "Acepto los términos de uso (obligatorio)",
+        captchaRegisterLabel: "No soy un robot (obligatorio)",
+        emailNotifLabel: "Recibir notificaciones por correo (opcional)",
+        registerButton: "Crear mi cuenta",
+        haveAccountLink: "Ya tengo una cuenta",
+        successMessage: "¡Cuenta creada exitosamente! Bienvenido a AXL.",
+        errorMessage: "Ocurrió un error. Por favor, verifica tu información.",
+        footerCopy: "© 2025 AXL. Todos los derechos reservados."
+      },
+      ht: {
+        pageTitle: "Byenvini 📚",
+        choicePrompt: "Èske ou gen yon kont deja?",
+        loginTitle: "Koneksyon",
+        loginEmailPlaceholder: "Imèl oswa ID (obligatwa)",
+        loginPasswordPlaceholder: "Modpas (obligatwa)",
+        rememberMeLabel: "Sonje mwen (opsyonal)",
+        captchaLabel: "Mwen pa yon robo (obligatwa)",
+        loginButton: "Konekte",
+        createAccountLink: "Kreye yon nouvo kont",
+        forgotPasswordLink: "Modpas ou bliye?",
+        personalInfoTitle: "Enfòmasyon Pèsonèl",
+        schoolInfoTitle: "Enfòmasyon Lekòl",
+        parentInfoTitle: "Enfòmasyon Paran / Gadyen",
+        securityInfoTitle: "Sekirite ak Akses",
+        acceptTermsLabel: "Mwen aksepte kondisyon yo (obligatwa)",
+        captchaRegisterLabel: "Mwen pa yon robo (obligatwa)",
+        emailNotifLabel: "Resevwa notifikasyon imèl (opsyonal)",
+        registerButton: "Kreye kont mwen",
+        haveAccountLink: "Mwen gen yon kont deja",
+        successMessage: "Kont kreye avèk siksè! Byenvini sou AXL.",
+        errorMessage: "Yon erè fèt. Tanpri verifye enfòmasyon ou.",
+        footerCopy: "© 2025 AXL. Tout dwa rezève."
+      }
+    };
+
+    // Fonction pour changer la langue de la page connexion
+    function updateConnectionLanguage() {
+      const lang = currentLanguage();
+      const t = connectionTranslations[lang] || connectionTranslations.fr;
+
+      // Mises à jour des textes
+      setText("page-title", t.pageTitle);
+      setText("choice-prompt", t.choicePrompt);
+      setText("login-title", t.loginTitle);
+      setText("remember-me-label", t.rememberMeLabel);
+      setText("captcha-label", t.captchaLabel);
+      setText("login-button", t.loginButton);
+      setText("create-account-link", t.createAccountLink);
+      setText("forgot-password-link", t.forgotPasswordLink);
+      setText("personal-info-title", t.personalInfoTitle);
+      setText("school-info-title", t.schoolInfoTitle);
+      setText("parent-info-title", t.parentInfoTitle);
+      setText("security-info-title", t.securityInfoTitle);
+      setText("accept-terms-label", t.acceptTermsLabel);
+      setText("captcha-register-label", t.captchaRegisterLabel);
+      setText("email-notif-label", t.emailNotifLabel);
+      setText("register-button", t.registerButton);
+      setText("have-account-link", t.haveAccountLink);
+      setText("footer-copy", t.footerCopy);
+
+      // Mise à jour des placeholders
+      document.getElementById("login-email").placeholder = t.loginEmailPlaceholder;
+      document.getElementById("login-password").placeholder = t.loginPasswordPlaceholder;
+    }
+
+    // Afficher/masquer formulaires
+    function showLogin() {
+      document.getElementById("loginForm").classList.add("active");
+      document.getElementById("registerForm").classList.remove("active");
+      document.getElementById("btn-login").classList.add("active");
+      document.getElementById("btn-register").classList.remove("active");
+    }
+
+    function showRegister() {
+      document.getElementById("registerForm").classList.add("active");
+      document.getElementById("loginForm").classList.remove("active");
+      document.getElementById("btn-register").classList.add("active");
+      document.getElementById("btn-login").classList.remove("active");
+    }
+
+    // Gestion de la connexion
+    function handleLogin() {
+      const email = document.getElementById("login-email").value;
+      const password = document.getElementById("login-password").value;
+      const captcha = document.getElementById("captcha-login").checked;
+
+      if (!email || !password) {
+        showMessage("loginMessage", "Veuillez remplir tous les champs.", "error");
+        return;
+      }
+
+      if (!captcha) {
+        showMessage("loginMessage", "Veuillez cocher la case CAPTCHA.", "error");
+        return;
+      }
+
+      // Simulation de connexion réussie
+      localStorage.setItem("userEmail", email);
+      localStorage.setItem("userConnected", "true");
+      
+      const lang = currentLanguage();
+      const message = connectionTranslations[lang]?.successMessage || "Connexion réussie !";
+      showMessage("loginMessage", message);
+      
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 1500);
+    }
+
+    // Gestion de l'inscription
+    document.getElementById("registerForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const niveau = document.getElementById("register-level").value;
+      const password = document.getElementById("register-password").value;
+      const passwordConfirm = document.getElementById("register-password-confirm").value;
+      const terms = document.getElementById("accept-terms").checked;
+      const captcha = document.getElementById("captcha-register").checked;
+
+      if (!niveau) {
+        showMessage("registerMessage", "Veuillez sélectionner votre niveau scolaire !", "error");
+        return;
+      }
+
+      if (password !== passwordConfirm) {
+        showMessage("registerMessage", "Les mots de passe ne correspondent pas !", "error");
+        return;
+      }
+
+      if (!terms || !captcha) {
+        showMessage("registerMessage", "Veuillez accepter les conditions et le CAPTCHA.", "error");
+        return;
+      }
+
+      // Stockage des données
+      localStorage.setItem("niveauScolaire", niveau);
+      localStorage.setItem("userEmail", document.getElementById("register-email").value);
+      localStorage.setItem("userConnected", "true");
+      
+      const lang = currentLanguage();
+      const message = connectionTranslations[lang]?.successMessage || "Compte créé avec succès !";
+      showMessage("registerMessage", message);
+      
+      setTimeout(() => {
+        window.location.href = "parametres.html";
+      }, 1500);
+    });
+
+    // Fonction pour afficher les messages
+    function showMessage(elementId, message, type = "success") {
+      const element = document.getElementById(elementId);
+      element.textContent = message;
+      element.classList.add("show");
+      if (type === "error") {
+        element.classList.add("error");
+      } else {
+        element.classList.remove("error");
+      }
+    }
+
+    // Initialisation
+    document.addEventListener("DOMContentLoaded", () => {
+      updateConnectionLanguage();
+      
+      // Écouter les changements de langue
+      document.getElementById("languageSelect")?.addEventListener("change", updateConnectionLanguage);
+    });
+  </script>
 </body>
 </html>
